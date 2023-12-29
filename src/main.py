@@ -13,7 +13,7 @@ from vex import *
 brain=Brain()
 
 
-# ------------- Robot Initilization Code ------------- #
+# ------------- Robot Initialization Code ------------- #
 
 # To add a new device do the following:
 # 1. Add a variable name and add the corresponding code
