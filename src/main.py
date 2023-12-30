@@ -271,7 +271,7 @@ def onauton_autonomous_0():
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 12, INCHES)
-    IntakeSpin.spin(REVERSE) # matchload scored
+    IntakeSpin.spin(REVERSE) # score matchload
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 24, INCHES)
     IntakeSpin.spin(REVERSE) # intake first triball
