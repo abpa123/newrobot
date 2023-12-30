@@ -43,6 +43,41 @@ sideskirt = DigitalOut(brain.three_wire_port.h)
 To add a device or change the code, add your device below and add the corresponding code such as `DigitalOut()` or `Motor()`. Then define a function that uses that device later in the `main.py` code file and finally call it in the system event handlers. It will not work without these steps.
 
 
-### Driver Code, Autonomous Code, and Other Code
+### Driver Code
 
-This is what you will be editing most of the time to code driver commands and autonomous commands for the robot. Steps editing for each section are outlined in comments (Things that look like this: `#`) in the code.
+The driver code has commands for all types of driver functions. This is where you program things that the controller will execute. You should have defined the device that is performing the function in the robot initialization code. The basic layout of code in the driver code section looks like this:
+
+```
+def when_started1():
+    global myVariable
+    drivetrain.set_drive_velocity(100, PERCENT)
+    drivetrain.set_turn_velocity(100, PERCENT)
+    IntakeSpin.set_velocity(100, PERCENT)
+    FlywheelUpDown.set_velocity(70, PERCENT)
+    Flywheel.set_velocity(100, PERCENT)
+```
+
+When adding your function, be sure to continue the number system when naming and function and including `myVariable` although I am not sure what it does. It could be useless, it could be a VEX robotics specific thing. Note that `whenstarted1()` is the initial function and it is where you define initial characteristics such as velocity for the driver period. After creating your function, be sure to call it in the system event handlers. They look like this:
+
+```
+ws2 = Thread( when_started2 )
+ws3 = Thread( when_started3 )
+```
+
+Continue the number convention and add yours at the bottom. Also, if your function uses any new buttons, such as the A button, B button, etc. Then be sure to include that by typing the correct code. This tells VEX about your new button that is in use. The basic structure for it looks like this: (The example uses the X button):
+
+```
+controller_1.buttonX.pressed(onevent_controller_1buttonX_pressed_0)
+```
+
+### Autonomous Code
+
+To create autonomous code, look for the `onauton_autonomous_0()` function. This is where you should put your code. If you want to create seperate functions to make the code more organized or to test specific sections, simply define it above and call it in the main autonomous function.
+
+### All other Code
+
+The driver and autonomous code is the main code that will be edited, however there are instructions in the code for what can and cannot be edited in other sections. They are there in the comments (Things that look like this: `#`). 
+
+
+
+
