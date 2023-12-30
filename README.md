@@ -64,7 +64,15 @@ ws2 = Thread( when_started2 )
 ws3 = Thread( when_started3 )
 ```
 
-Continue the number convention and add yours at the bottom. Also, if your function uses any new buttons, such as the A button, B button, etc. Then be sure to include that by typing the correct code. This tells VEX about your new button that is in use. The basic structure for it looks like this: (The example uses the X button):
+There are a few main ways to define a new function. In that same driver code, create a function that uses a button such as A, B, X, or Y. You can do this by creating a button function like the following: 
+
+```
+def onevent_controller_1buttonX_pressed_0():
+    insert code here...
+```
+
+Then use this code later in the system event handlers by telling VEX that you are using that button and when that button is pressed, call the function you defined earlier. The function that will call is that `onevent_controller_1buttonX_pressed_0()` function. You can do this in the system event handlers by doing something like this, instead with your function name:
+
 
 ```
 controller_1.buttonX.pressed(onevent_controller_1buttonX_pressed_0)
@@ -76,7 +84,19 @@ To create autonomous code, look for the `onauton_autonomous_0()` function. This 
 
 ### All other Code
 
-The driver and autonomous code is the main code that will be edited, however there are instructions in the code for what can and cannot be edited in other sections. They are there in the comments (Things that look like this: `#`). Test the robot functionality if you make any changes to important VEX code.
+The driver and autonomous code is the main code that will be edited, however there are instructions in the code for what can and cannot be edited in other sections. It should be clearly marked in the comments (Things that look like this: `#`). Test the robot functionality if you make any changes to important VEX code.
+
+## Documentation
+
+While the visual studio code extension does not have much documentation or support, it is actually the same as the vexcode v5 app. The code is the same thing and vexcode v5 has documentation built in. In the app, or the web version, simply click the "?" to figure out what a command does and all the paramaters it uses. The vexcode v5 app commands are the same as the vscode extension commands.
+
+
+
+
+
+
+
+
 
 
 
