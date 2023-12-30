@@ -33,7 +33,7 @@ left_drive_smart = MotorGroup(left_motor_a, left_motor_b)
 right_motor_a = Motor(Ports.PORT8, GearSetting.RATIO_6_1, True)
 right_motor_b = Motor(Ports.PORT9, GearSetting.RATIO_6_1, True)
 right_drive_smart = MotorGroup(right_motor_a, right_motor_b)
-drivetrain_inertial = Inertial(Ports.PORT21)
+drivetrain_inertial = Inertial(Ports.PORT21) # change port number
 drivetrain = SmartDrive(left_drive_smart, right_drive_smart, drivetrain_inertial, 319.19, 320, 40, MM, 1)
 IntakeSpin = Motor(Ports.PORT11, GearSetting.RATIO_6_1, False)
 FlywheelUpDown = Motor(Ports.PORT12, GearSetting.RATIO_6_1, False)
@@ -79,7 +79,7 @@ drivetrain_l_needs_to_be_stopped_controller_1 = False
 drivetrain_r_needs_to_be_stopped_controller_1 = False
 
 
-# Edit Dec 29: I added backslashes to make the global span over multiple lines
+# I added backslashes to make the global span over multiple lines
 # Remove the "\" on each line and make it one singular line if it causes problems
 
 def rc_auto_loop_function_controller_1():
@@ -266,6 +266,7 @@ def when_started8():
 
 
 # ------------- Autonomous Code ------------- #
+
 def initialization():
     # Set everything up, set velocities
     drivetrain.set_drive_velocity(100, PERCENT)
@@ -296,7 +297,7 @@ def score_triballs():
 
 
 def knock_triball():
-    # Go to bottom corner to knock triball out of match-load zone using sideskirts
+    # Go to bottom corner, knock triball out using wings
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(RIGHT, 90, DEGREES)
@@ -309,6 +310,7 @@ def touch_bar():
     # Touch Bar
     drivetrain.drive_for(FORWARD, 54, INCHES)
 
+
 # Add in auton code in the function below here
 # Define seperate functions to make code readable
 # above, make sure to call them in function below
@@ -320,8 +322,6 @@ def onauton_autonomous_0():
     knock_triball()
     touch_bar()
 
-
-
 # ------------------------------------------------------ #
 
 
@@ -331,7 +331,7 @@ def onauton_autonomous_0():
 # Call the autonomous function - do not touch this
 def vexcode_auton_function():
 
-    auton_task_0 = Thread( onauton_autonomous_0 )
+    auton_task_0 = Thread(onauton_autonomous_0)
     while(competition.is_autonomous() and competition.is_enabled()):
         wait(10, MSEC)
     auton_task_0.stop()
