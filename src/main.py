@@ -20,6 +20,11 @@ brain=Brain()
 # 2. Define a function below in the Actual Code section
 # 3. Call it in the system event handlers
 
+# Cartridge Ratios:
+# 1. Red Cartridge: 36 to 1 (100 RPM)
+# 2. Green Cartridge: 18 to 1 (200 RPM)
+# 3. Blue Cartridge: 6 to 1 (600 RPM)
+
 # Robot configtguration code
 controller_1 = Controller(PRIMARY)
 left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, False)
@@ -173,7 +178,7 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 
 # **************************************** START OF ACTUAL CODE **************************************** #
 
-# ------------- Driver Code ------------- #
+# ------------- Driver and Controller Code ------------- #
 
 # The following functions are commands for the 
 # controller to perform functions, I am not sure 
@@ -186,6 +191,15 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 #   global myVariable
 #   insert code here...
 
+# You can also define functions for buttons:
+# def onevent_controller_1buttonA_pressed_0():
+#   global myVariable
+#   insert code here to be executed when A hit
+
+# Note if you do this then you have to tell VEX
+# in the system event handlers, like this:
+# controller_1.buttonA.pressed(onevent_the_rest...)
+
 
 myVariable = 0
 
@@ -197,17 +211,21 @@ def when_started1():
     FlywheelUpDown.set_velocity(70, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
 
+
 def when_started2():
     global myVariable
     sideskirt.set(False)
+
 
 def onevent_controller_1buttonX_pressed_0():
     global myVariable
     sideskirt.set(True)
 
+
 def onevent_controller_1buttonY_pressed_0():
     global myVariable
     sideskirt.set(False)
+
 
 def when_started3():
     global myVariable
@@ -216,12 +234,14 @@ def when_started3():
     else:
         FlywheelUpDown.stop()
 
+
 def when_started4():
     global myVariable
     if controller_1.buttonL1.pressing():
         IntakeSpin.spin(FORWARD)
     else:
         IntakeSpin.stop()
+
 
 def when_started5():
     global myVariable
@@ -230,12 +250,14 @@ def when_started5():
     else:
         IntakeSpin.stop()
 
+
 def when_started6():
     global myVariable
     if controller_1.buttonUp.pressing():
         FlywheelUpDown.spin(FORWARD)
     else:
         FlywheelUpDown.stop()
+
 
 def when_started7():
     global myVariable
@@ -244,6 +266,7 @@ def when_started7():
     else:
         Flywheel.stop()
 
+
 def when_started8():
     global myVariable
     if controller_1.buttonR1.pressing():
@@ -251,16 +274,23 @@ def when_started8():
     else:
         IntakeSpin.stop()
 
+
 # --------------------------------------- #
 
 
 
 # ------------- Autonomous Code ------------- #
+def initialization():
+    # Set everything up, set velocities
+    drivetrain.set_drive_velocity(100, PERCENT)
+    drivetrain.set_turn_velocity(100, PERCENT)
+    IntakeSpin.set_velocity(100, PERCENT)
+    FlywheelUpDown.set_velocity(70, PERCENT)
+    Flywheel.set_velocity(100, PERCENT)
 
 
 def score_triballs():
     # Score Matchloads, Intake Two Triballs and score them
-
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 12, INCHES)
@@ -281,52 +311,50 @@ def score_triballs():
 
 def knock_triball():
     # Go to bottom corner to knock triball out of match-load zone using sideskirts
-
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(RIGHT, 90, DEGREES)
-    drivetrain.drive_for(FORWARD, 6, INCHES) # change number
+    drivetrain.drive_for(FORWARD, 6, INCHES) # change this number
     sideskirt.set(True) # deploy wings
     drivetrain.turn_for(RIGHT, 360, DEGREES) # knocks triball out
 
 
 def touch_bar():
     # Touch Bar
-
     drivetrain.drive_for(FORWARD, 54, INCHES)
 
 # Add in auton code in the function below here
 # Define seperate functions to make code readable
 # above, make sure to call them in function below
 
+
 def onauton_autonomous_0():
     global myVariable
-
-    # drivetrain.drive_for(FORWARD, 200, MM) # placeholder for now
+    initialization()
     score_triballs()
     knock_triball()
     touch_bar()
 
 
 
+# ------------------------------------------------------ #
+
+
+
+# ------------- Call Driver and Autonomous in Competition - Do Not Touch ------------- #
+
 # Call the autonomous function - do not touch this
 def vexcode_auton_function():
 
     auton_task_0 = Thread( onauton_autonomous_0 )
-    while( competition.is_autonomous() and competition.is_enabled() ):
-        wait( 10, MSEC )
+    while(competition.is_autonomous() and competition.is_enabled()):
+        wait(10, MSEC)
     auton_task_0.stop()
-
-# ------------------------------------------- #
-
-
-
-# ------------- Call Things Code - Do Not Touch This ------------- #
 
 # Call the driver function - do not touch this
 def vexcode_driver_function():
-    while( competition.is_driver_control() and competition.is_enabled() ):
-        wait( 10, MSEC )
+    while(competition.is_driver_control() and competition.is_enabled()):
+        wait(10, MSEC)
 
 
 # register the competition functions - do not touch this
@@ -335,8 +363,7 @@ competition = Competition( vexcode_driver_function, vexcode_auton_function )
 # Calibrate the Drivetrain - do not touch this
 calibrate_drivetrain()
 
-# ---------------------------------------------------------------- #
-
+# ------------------------------------------------------------------------------------ #
 
 
 
