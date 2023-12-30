@@ -49,7 +49,6 @@ The driver code has commands for all types of driver functions. This is where yo
 
 ```
 def when_started1():
-    global myVariable
     drivetrain.set_drive_velocity(100, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
     IntakeSpin.set_velocity(100, PERCENT)
@@ -57,7 +56,7 @@ def when_started1():
     Flywheel.set_velocity(100, PERCENT)
 ```
 
-When adding your function, be sure to continue the number system when naming and function and including `myVariable` although I am not sure what it does. It could be useless, it could be a VEX robotics specific thing. Note that `whenstarted1()` is the initial function and it is where you define initial characteristics such as velocity for the driver period. After creating your function, be sure to call it in the system event handlers. They look like this:
+When adding your function, be sure to continue the number system when naming the function. Note that `whenstarted1()` is the initial function and it is where you define initial characteristics such as velocity for the driver period. After creating your function, be sure to call it in the system event handlers. They look like this:
 
 ```
 ws2 = Thread( when_started2 )
