@@ -267,7 +267,7 @@ def score_triballs():
     IntakeSpin.spin(REVERSE) # score matchload
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 24, INCHES)
-    IntakeSpin.spin(REVERSE) # intake first triball
+    IntakeSpin.spin(FORWARD) # intake first triball
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 24, INCHES)
     IntakeSpin.spin(REVERSE) # first triball scored
