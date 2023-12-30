@@ -263,10 +263,45 @@ def when_started8():
 
 def onauton_autonomous_0():
     global myVariable
-    drivetrain.drive_for(FORWARD, 200, MM) # placeholder for now
+
+    # drivetrain.drive_for(FORWARD, 200, MM) # placeholder for now
+
+    # Score Matchloads, Intake Two Triballs and score them
+
+    drivetrain.drive_for(FORWARD, 60, INCHES)
+    drivetrain.turn_for(LEFT, 90, DEGREES)
+    drivetrain.drive_for(FORWARD, 12, INCHES)
+    IntakeSpin.spin(REVERSE) # matchload scored
+    drivetrain.turn_for(RIGHT, 180, DEGREES)
+    drivetrain.drive_for(FORWARD, 24, INCHES)
+    IntakeSpin.spin(REVERSE) # intake first triball
+    drivetrain.turn_for(RIGHT, 180, DEGREES)
+    drivetrain.drive_for(FORWARD, 24, INCHES)
+    IntakeSpin.spin(REVERSE) # first triball scored
+    drivetrain.turn_for(RIGHT, 180, DEGREES)
+    drivetrain.drive_for(FORWARD, 48, INCHES)
+    IntakeSpin.spin(FORWARD) # intake second triball
+    drivetrain.turn_for(RIGHT, 180, DEGREES)
+    drivetrain.drive_for(FORWARD, 48, INCHES)
+    IntakeSpin.spin(REVERSE) # second triball scored
+
+    # Go to bottom corner to knock triball out of match-load zone using sideskirts
+
+    drivetrain.turn_for(LEFT, 90, DEGREES)
+    drivetrain.drive_for(FORWARD, 60, INCHES)
+    drivetrain.turn_for(RIGHT, 90, DEGREES)
+    drivetrain.drive_for(FORWARD, 6, INCHES) # change number
+    sideskirt.set(True)
+    drivetrain.turn_for(RIGHT, 360, DEGREES)
+
+    # Touch Bar
+
+    drivetrain.drive_for(FORWARD, 54, INCHES)
+
 
 # Call the autonomous function - do not touch this
 def vexcode_auton_function():
+
     auton_task_0 = Thread( onauton_autonomous_0 )
     while( competition.is_autonomous() and competition.is_enabled() ):
         wait( 10, MSEC )
