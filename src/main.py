@@ -261,11 +261,8 @@ def when_started8():
 # Define seperate functions to make code readable
 # above, make sure to call them in function below
 
-def onauton_autonomous_0():
-    global myVariable
 
-    # drivetrain.drive_for(FORWARD, 200, MM) # placeholder for now
-
+def score_triballs():
     # Score Matchloads, Intake Two Triballs and score them
 
     drivetrain.drive_for(FORWARD, 60, INCHES)
@@ -285,18 +282,33 @@ def onauton_autonomous_0():
     drivetrain.drive_for(FORWARD, 48, INCHES)
     IntakeSpin.spin(REVERSE) # second triball scored
 
+
+def knock_triball():
     # Go to bottom corner to knock triball out of match-load zone using sideskirts
 
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(RIGHT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 6, INCHES) # change number
-    sideskirt.set(True)
-    drivetrain.turn_for(RIGHT, 360, DEGREES)
+    sideskirt.set(True) # deploy wings
+    drivetrain.turn_for(RIGHT, 360, DEGREES) # knocks triball out
 
+
+def touch_bar():
     # Touch Bar
 
     drivetrain.drive_for(FORWARD, 54, INCHES)
+
+
+
+def onauton_autonomous_0():
+    global myVariable
+
+    # drivetrain.drive_for(FORWARD, 200, MM) # placeholder for now
+    score_triballs()
+    knock_triball()
+    touch_bar()
+
 
 
 # Call the autonomous function - do not touch this
