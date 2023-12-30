@@ -25,19 +25,28 @@ brain=Brain()
 # 2. Green Cartridge: 18 to 1 (200 RPM)
 # 3. Blue Cartridge: 6 to 1 (600 RPM)
 
+# Motor Directions
+# direction variable is set to False
+# False is counterclockwise, Normal in vexcode v5
+# True is clockwise, Reverse in vexcode v5
+
+# drivetrain should be two direction, two not direction
+
+direction = False
+
 # Robot configtguration code
 controller_1 = Controller(PRIMARY)
-left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, False)
-left_motor_b = Motor(Ports.PORT10, GearSetting.RATIO_6_1, False)
+left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, direction)
+left_motor_b = Motor(Ports.PORT10, GearSetting.RATIO_6_1, direction)
 left_drive_smart = MotorGroup(left_motor_a, left_motor_b)
-right_motor_a = Motor(Ports.PORT8, GearSetting.RATIO_6_1, True)
-right_motor_b = Motor(Ports.PORT9, GearSetting.RATIO_6_1, True)
+right_motor_a = Motor(Ports.PORT8, GearSetting.RATIO_6_1, not direction)
+right_motor_b = Motor(Ports.PORT9, GearSetting.RATIO_6_1, not direction)
 right_drive_smart = MotorGroup(right_motor_a, right_motor_b)
 drivetrain_inertial = Inertial(Ports.PORT21) # change port number
 drivetrain = SmartDrive(left_drive_smart, right_drive_smart, drivetrain_inertial, 319.19, 320, 40, MM, 1)
-IntakeSpin = Motor(Ports.PORT11, GearSetting.RATIO_6_1, False)
-FlywheelUpDown = Motor(Ports.PORT12, GearSetting.RATIO_6_1, False)
-Flywheel = Motor(Ports.PORT1, GearSetting.RATIO_6_1, False)
+IntakeSpin = Motor(Ports.PORT11, GearSetting.RATIO_6_1, direction)
+FlywheelUpDown = Motor(Ports.PORT12, GearSetting.RATIO_6_1, direction)
+Flywheel = Motor(Ports.PORT1, GearSetting.RATIO_6_1, direction)
 sideskirt = DigitalOut(brain.three_wire_port.h)
 
 # ---------------------------------------------------- #
@@ -152,10 +161,10 @@ def rc_auto_loop_function_controller_1():
                 Flywheel.stop()
                 controller_1_right_shoulder_control_motors_stopped = True
             if controller_1.buttonUp.pressing():
-                FlywheelUpDown.spin(FORWARD)
+                FlywheelUpDown.spin(REVERSE)
                 controller_1_up_down_buttons_control_motors_stopped = False
             elif controller_1.buttonDown.pressing():
-                FlywheelUpDown.spin(REVERSE)
+                FlywheelUpDown.spin(FORWARD)
                 controller_1_up_down_buttons_control_motors_stopped = False
             elif not controller_1_up_down_buttons_control_motors_stopped:
                 FlywheelUpDown.stop()
