@@ -181,19 +181,16 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 # ------------- Driver and Controller Code ------------- #
 
 # The following functions are commands for the 
-# controller to perform functions, I am not sure 
-# what "myVariable" does at the moment
+# controller to perform functions
 
 
 # How to define new function in this code:
 
 # def when_started#(): (continue the convention)
-#   global myVariable
 #   insert code here...
 
 # You can also define functions for buttons:
 # def onevent_controller_1buttonA_pressed_0():
-#   global myVariable
 #   insert code here to be executed when A hit
 
 # Note if you do this then you have to tell VEX
@@ -201,10 +198,8 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 # controller_1.buttonA.pressed(onevent_the_rest...)
 
 
-myVariable = 0
 
 def when_started1():
-    global myVariable
     drivetrain.set_drive_velocity(100, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
     IntakeSpin.set_velocity(100, PERCENT)
@@ -213,22 +208,18 @@ def when_started1():
 
 
 def when_started2():
-    global myVariable
     sideskirt.set(False)
 
 
 def onevent_controller_1buttonX_pressed_0():
-    global myVariable
     sideskirt.set(True)
 
 
 def onevent_controller_1buttonY_pressed_0():
-    global myVariable
     sideskirt.set(False)
 
 
 def when_started3():
-    global myVariable
     if controller_1.buttonDown.pressing():
         FlywheelUpDown.spin(REVERSE)
     else:
@@ -236,7 +227,6 @@ def when_started3():
 
 
 def when_started4():
-    global myVariable
     if controller_1.buttonL1.pressing():
         IntakeSpin.spin(FORWARD)
     else:
@@ -244,7 +234,6 @@ def when_started4():
 
 
 def when_started5():
-    global myVariable
     if controller_1.buttonL2.pressing():
         IntakeSpin.spin(REVERSE)
     else:
@@ -252,7 +241,6 @@ def when_started5():
 
 
 def when_started6():
-    global myVariable
     if controller_1.buttonUp.pressing():
         FlywheelUpDown.spin(FORWARD)
     else:
@@ -260,7 +248,6 @@ def when_started6():
 
 
 def when_started7():
-    global myVariable
     if controller_1.buttonR2.pressing():
         Flywheel.spin(REVERSE)
     else:
@@ -268,7 +255,6 @@ def when_started7():
 
 
 def when_started8():
-    global myVariable
     if controller_1.buttonR1.pressing():
         Flywheel.spin(FORWARD)
     else:
@@ -329,7 +315,6 @@ def touch_bar():
 
 
 def onauton_autonomous_0():
-    global myVariable
     initialization()
     score_triballs()
     knock_triball()
