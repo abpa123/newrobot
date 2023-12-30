@@ -287,7 +287,7 @@ def initialization():
 
 def score_triballs():
     # Score Matchloads, Intake Two Triballs and score them
-    drivetrain.drive_for(FORWARD, 45, INCHES)
+    drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 12, INCHES)
     IntakeSpin.spin(REVERSE) # score matchload
