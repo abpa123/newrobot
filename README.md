@@ -76,7 +76,7 @@ To create autonomous code, look for the `onauton_autonomous_0()` function. This 
 
 ### All other Code
 
-The driver and autonomous code is the main code that will be edited, however there are instructions in the code for what can and cannot be edited in other sections. They are there in the comments (Things that look like this: `#`). 
+The driver and autonomous code is the main code that will be edited, however there are instructions in the code for what can and cannot be edited in other sections. They are there in the comments (Things that look like this: `#`). Test the robot functionality if you make any changes to important VEX code.
 
 
 
