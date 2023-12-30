@@ -257,10 +257,6 @@ def when_started8():
 
 # ------------- Autonomous Code ------------- #
 
-# Add in auton code in the function below here
-# Define seperate functions to make code readable
-# above, make sure to call them in function below
-
 
 def score_triballs():
     # Score Matchloads, Intake Two Triballs and score them
@@ -299,7 +295,9 @@ def touch_bar():
 
     drivetrain.drive_for(FORWARD, 54, INCHES)
 
-
+# Add in auton code in the function below here
+# Define seperate functions to make code readable
+# above, make sure to call them in function below
 
 def onauton_autonomous_0():
     global myVariable
