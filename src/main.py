@@ -320,16 +320,31 @@ def touch_bar():
     drivetrain.drive_for(FORWARD, 54, INCHES)
 
 
+# Put all the code for the auton in respsective functions
+    
+
+def fifteen_second_auton():
+    initialization()
+    score_triballs()
+    knock_triball()
+    touch_bar()
+
+def one_min_auton():
+    initialization()
+    score_triballs()
+    # insert rest here...
+
 # Add in auton code in the function below here
 # Define seperate functions to make code readable
 # above, make sure to call them in function below
 
 
 def onauton_autonomous_0():
-    initialization()
-    score_triballs()
-    knock_triball()
-    touch_bar()
+    fifteen_second_auton()
+
+    # when you want to run the 15 second autonomous,
+    # call fifteen_second_auton() function, If you
+    # want the one min auton, call one_min_auton()
 
 # ------------------------------------------------------ #
 
