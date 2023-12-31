@@ -207,7 +207,6 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 # controller_1.buttonA.pressed(onevent_the_rest...)
 
 
-
 def when_started1():
     drivetrain.set_drive_velocity(100, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
@@ -217,43 +216,42 @@ def when_started1():
 
 
 def when_started2():
-    sideskirt.set(False)
+    sideskirt.set(False) # orginally set to closed
 
 
 def onevent_controller_1buttonX_pressed_0():
-    sideskirt.set(True)
+    sideskirt.set(True) # when X pressed, open wings
 
 
 def onevent_controller_1buttonY_pressed_0():
-    sideskirt.set(False)
+    sideskirt.set(False) # when y pressed, close wings
 
 
 def when_started3():
     if controller_1.buttonDown.pressing():
-        FlywheelUpDown.spin(REVERSE)
+        FlywheelUpDown.spin(FORWARD)
     else:
         FlywheelUpDown.stop()
 
 
 def when_started4():
+    if controller_1.buttonUp.pressing():
+        FlywheelUpDown.spin(REVERSE)
+    else:
+        FlywheelUpDown.stop()
+
+def when_started5():
     if controller_1.buttonL1.pressing():
         IntakeSpin.spin(FORWARD)
     else:
         IntakeSpin.stop()
 
 
-def when_started5():
+def when_started6():
     if controller_1.buttonL2.pressing():
         IntakeSpin.spin(REVERSE)
     else:
         IntakeSpin.stop()
-
-
-def when_started6():
-    if controller_1.buttonUp.pressing():
-        FlywheelUpDown.spin(FORWARD)
-    else:
-        FlywheelUpDown.stop()
 
 
 def when_started7():
@@ -268,7 +266,6 @@ def when_started8():
         Flywheel.spin(FORWARD)
     else:
         IntakeSpin.stop()
-
 
 # --------------------------------------- #
 
@@ -297,12 +294,6 @@ def score_triballs():
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 24, INCHES)
     IntakeSpin.spin(REVERSE) # first triball scored
-    drivetrain.turn_for(RIGHT, 180, DEGREES)
-    drivetrain.drive_for(FORWARD, 48, INCHES)
-    IntakeSpin.spin(FORWARD) # intake second triball
-    drivetrain.turn_for(RIGHT, 180, DEGREES)
-    drivetrain.drive_for(FORWARD, 48, INCHES)
-    IntakeSpin.spin(REVERSE) # second triball scored
 
 
 def knock_triball():
@@ -320,6 +311,15 @@ def touch_bar():
     drivetrain.drive_for(FORWARD, 54, INCHES)
 
 
+def one_min_auton_second_triball():
+    drivetrain.turn_for(RIGHT, 180, DEGREES)
+    drivetrain.drive_for(FORWARD, 48, INCHES)
+    IntakeSpin.spin(FORWARD) # intake second triball
+    drivetrain.turn_for(RIGHT, 180, DEGREES)
+    drivetrain.drive_for(FORWARD, 48, INCHES)
+    IntakeSpin.spin(REVERSE) # second triball scored
+
+
 # Put all the code for the auton in respsective functions
     
 
@@ -329,10 +329,14 @@ def fifteen_second_auton():
     knock_triball()
     touch_bar()
 
+
 def one_min_auton():
     initialization()
     score_triballs()
-    # insert rest here...
+    one_min_auton_second_triball()
+    knock_triball()
+    touch_bar()
+
 
 # Add in auton code in the function below here
 # Define seperate functions to make code readable
@@ -354,11 +358,11 @@ def onauton_autonomous_0():
 
 # Call the autonomous function - do not touch this
 def vexcode_auton_function():
-
     auton_task_0 = Thread(onauton_autonomous_0)
     while(competition.is_autonomous() and competition.is_enabled()):
         wait(10, MSEC)
     auton_task_0.stop()
+
 
 # Call the driver function - do not touch this
 def vexcode_driver_function():
