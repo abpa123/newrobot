@@ -312,7 +312,8 @@ def touch_bar():
 
 
 def one_min_auton_second_triball():
-    drivetrain.turn_for(RIGHT, 180, DEGREES)
+    # only to be used in the one minute, the fifteen second is too long
+    drivetrain.turn_for(LEFT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 48, INCHES)
     IntakeSpin.spin(FORWARD) # intake second triball
     drivetrain.turn_for(RIGHT, 180, DEGREES)
@@ -335,7 +336,7 @@ def one_min_auton():
     score_triballs()
     one_min_auton_second_triball()
     knock_triball()
-    touch_bar()
+    # touch_bar() might not be needed
 
 
 # Add in auton code in the function below here
