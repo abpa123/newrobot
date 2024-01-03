@@ -16,6 +16,8 @@ By completing the above steps you should be able to hit "Open in Visual Studio C
 > 1. You may see in Github Desktop something other than Visual Studio Code, such as PyCharm. The code only works on Visual Studio Code. To change the app you open the repository with, simply go to Settings, Integration and change the external editor you are using.
 > 2. In Visual Studio Code you need to have the VEX extension downloaded. For the code to download to a robot, or for it to actually run, you will need the Visual Studio Code extension downloaded. To do this, go to the extensions tab and search up "VEX". Look for the official VEX extension and download it. 
 
+This is currently a private repository so ask the owner to get access to its files. None of the above steps will work without this.
+
 ## Important Notes on editing the code
 
 There are a few main sections you may find yourself editing when working on the code. These are:
@@ -59,8 +61,8 @@ def when_started1():
 When adding your function, be sure to continue the number system when naming the function. Note that `whenstarted1()` is the initial function and it is where you define initial characteristics such as velocity for the driver period. After creating your function, be sure to call it in the system event handlers. They look like this:
 
 ```
-ws2 = Thread( when_started2 )
-ws3 = Thread( when_started3 )
+ws2 = Thread(when_started2)
+ws3 = Thread(when_started3)
 ```
 
 There are a few main ways to define a new function. In that same driver code, create a function that uses a button such as A, B, X, or Y. You can do this by creating a button function like the following: 
@@ -77,9 +79,59 @@ Then use this code later in the system event handlers by telling VEX that you ar
 controller_1.buttonX.pressed(onevent_controller_1buttonX_pressed_0)
 ```
 
+Note that everything eventually should be called in the system event handlers either by using the `ws2 = Thread(when_started2)` approach or the `controller_1.buttonX.pressed(onevent...` version depending on the type of event being executed. Use the second type when trying to execute an action using one of the letter buttons.
+
 ### Autonomous Code
 
-To create autonomous code, look for the `onauton_autonomous_0()` function. This is where you should put your code. If you want to create seperate functions to make the code more organized or to test specific sections, simply define it above and call it in the main autonomous function.
+The Autonomous Code is broken down into many functions in order to allow for better testing and the creation of new functions. VEX primarily has only two main times pre-programmed code is run. This is in the fifteen second autonomous and the one minute autonomous skills challenge. There is a section in the code deemed `Both Autons` which is code applicable for both of these autonomous programs. Then there is the `One Min Auton` part, which is only to be used for the skills challenge. There is a section where two seperate functions for the two different autonomous instances are defined and it it finally called in the main autonomous function called `onauton_autonomous_0`. The layout is like this:
+
+```
+# ------------- Call and Define Final Functions ------------- #
+
+# Call the functions above in the respsective autons
+# below, finally calling it in the main auton function
+
+
+def fifteen_second_auton():
+
+    # This ends up scoring the matchload,
+    # intaking and scoring one triball,
+    # knocking the triball in the match
+    # load zone out, and touching the 
+    # elevation bar
+
+    score_matchload()
+    score_triball()
+    knock_triball()
+    touch_elev_bar()
+
+
+def one_min_auton():
+
+    # This ends up scoring the matchload,
+    # and intaking and scoring two triballs
+
+    score_matchload()
+    score_triball()
+    one_min_auton_second_triball()
+
+
+# Call the autonomous function below, either
+# the fifteen_second_auton() or the 
+# one_min_auton(), change it before skills
+# or a match so the right one runs
+
+
+def onauton_autonomous_0():
+    initialization() # needed for both autons
+    fifteen_second_auton()
+
+    # when you want to run the 15 second autonomous,
+    # call fifteen_second_auton() function, If you
+    # want the one min auton, call one_min_auton()
+
+# ----------------------------------------------------------- #
+```
 
 ### All other Code
 
