@@ -6,12 +6,12 @@ in comparison to the catapult used before. The below description will outline ho
 ## How to Get Access to this Repository
 
 There are multiple steps that need to be taken to use this github repository. They are the following:
-> [!TIP]
+
 > 1. Download Github Desktop. You can do this by going to https://desktop.github.com/ and downloading their software.
 > 2. Open on Github Desktop. Once you have github desktop downloaded go to the github repository and look for the button that says "<> Code". The dropdown should allow you to "Open on Github Desktop".
 > 3. Clone Repository. The popup should allow you to hit the clone button, which despite the wording actully simply opens it on your device and does not create a new version.
 
-By completing the above steps you should be able to hit "Open in Visual Studio Code". There are some important catches though.
+By completing the above steps you should be able to hit "Open in Visual Studio Code", which should allow you to start editing. You might see a different editor that is not Visual Studio Code. The steps to change you editor are outlined below. All the important preliminary setup that you need to do is also described below.
 
 > [!IMPORTANT]
 > Note: You need the following things in order to use the Repository
