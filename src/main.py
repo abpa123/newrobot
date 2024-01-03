@@ -36,7 +36,7 @@ direction = False
 
 # Robot configuration code
 
-# ------------- Controller and Drivetrain ------------- #
+# --- Controller and Drivetrain --- #
 
 controller_1 = Controller(PRIMARY)
 left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, direction)
@@ -48,18 +48,18 @@ right_drive_smart = MotorGroup(right_motor_a, right_motor_b)
 drivetrain_inertial = Inertial(Ports.PORT21) # change port number
 drivetrain = SmartDrive(left_drive_smart, right_drive_smart, drivetrain_inertial, 319.19, 320, 40, MM, 1)
 
-# ----------------------------------------------------- #
+# --------------------------------- #
 
-# ------------- Mechanisms ------------- #
+# ----------- Mechanisms ---------- #
 
 IntakeSpin = Motor(Ports.PORT11, GearSetting.RATIO_6_1, direction)
 FlywheelUpDown = Motor(Ports.PORT12, GearSetting.RATIO_6_1, direction)
 Flywheel = Motor(Ports.PORT1, GearSetting.RATIO_6_1, direction)
 sideskirt = DigitalOut(brain.three_wire_port.h)
 
-# -------------------------------------- #
+# --------------------------------- #
 
-# ---------------------------------------------------- #
+# ----------------------------------------------------- #
 
 
 
@@ -68,7 +68,7 @@ sideskirt = DigitalOut(brain.three_wire_port.h)
 # wait for rotation sensor to fully initialize
 wait(30, MSEC)
 
-# ------------- Calibrate and Define Motors ------------- #
+# ------------ Calibrate and Define Motors ------------ #
 
 def calibrate_drivetrain():
     # Calibrate the Drivetrain Inertial
@@ -99,8 +99,9 @@ controller_1_up_down_buttons_control_motors_stopped = True
 drivetrain_l_needs_to_be_stopped_controller_1 = False
 drivetrain_r_needs_to_be_stopped_controller_1 = False
 
-# ------------------------------------------------------- #
+# ----------------------------------------------------- #
 
+# ------------------ Controller Loop ------------------ #
 
 def rc_auto_loop_function_controller_1():
 
@@ -113,21 +114,27 @@ def rc_auto_loop_function_controller_1():
     controller_1_right_shoulder_control_motors_stopped, \
     controller_1_up_down_buttons_control_motors_stopped, \
     remote_control_code_enabled
-    
-    # ------------- Drivetrain Code ------------- #
-
-    # This code simply makes sure that the Drivetrain
-    # functions as it should, starting and stopping
-    # when needed and takes care of the inertial
-    # sensor in the middle of the robot
 
     while True:
+
+        # This code simply makes sure that the Drivetrain
+        # functions as it should, starting and stopping
+        # when needed and takes care of the inertial
+        # sensor in the middle of the robot
+
         if remote_control_code_enabled:
+
+            # ------ Inertial Sensor Code ----- #
+
             if drivetrain_inertial.is_calibrating():
                 left_drive_smart.stop()
                 right_drive_smart.stop()
                 while drivetrain_inertial.is_calibrating():
                     sleep(25, MSEC)
+            
+            # --------------------------------- #
+
+            # -------- Drivetrain Code -------- #
             
             drivetrain_left_side_speed = controller_1.axis3.position()
             drivetrain_right_side_speed = controller_1.axis2.position()
@@ -152,9 +159,9 @@ def rc_auto_loop_function_controller_1():
                 right_drive_smart.set_velocity(drivetrain_right_side_speed, PERCENT)
                 right_drive_smart.spin(FORWARD)
             
-    # ------------------------------------------- #
+            # --------------------------------- #
 
-            # ------------- Intake Code ------------- #
+            # ---------- Intake Code ---------- #
                 
             # This code simply makes sure that the Intake
             # functions as it should, starting and stopping
@@ -172,10 +179,10 @@ def rc_auto_loop_function_controller_1():
                 IntakeSpin.stop()
                 controller_1_left_shoulder_control_motors_stopped = True
 
-            # --------------------------------------- #
+            # --------------------------------- #
 
-            # ------------- Flywheel Code ------------- #
-            
+            # --------- Flywheel Code --------- #
+
             # This code simply makes sure that the Flywheel
             # functions as it should, starting and stopping
             # when needed, to adjust directions change the
@@ -201,9 +208,12 @@ def rc_auto_loop_function_controller_1():
                 FlywheelUpDown.stop()
                 controller_1_up_down_buttons_control_motors_stopped = True
 
-            # ----------------------------------------- #
-
+            # --------------------------------- #
+                
         wait(20, MSEC)
+
+# ----------------------------------------------------- #
+
 
 # define variable for remote controller enable/disable
 remote_control_code_enabled = True
@@ -216,12 +226,12 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 
 # **************************************** START OF ACTUAL CODE **************************************** #
 
-# ------------- Driver and Controller Code ------------- #
+# ------------- Driver and Controller Code ------------ #
 
 # The following functions are commands for the 
 # controller to perform functions
 
-# ------------- Define a Function ------------- #
+# ------- Define a Function ------- #
 
 # def when_started#(): (continue the convention)
 #   insert code here...
@@ -234,7 +244,7 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 # in the system event handlers, like this:
 # controller_1.buttonA.pressed(onevent...)
 
-# --------------------------------------------- #
+# --------------------------------- #
 
 # All code here should be called in system event 
 # handlers below eventually, regardless of function type
@@ -267,7 +277,7 @@ def onevent_controller_1buttonY_pressed_0():
 
 # --------------------------------- #
 
-# ------------- Flywheel ------------- #
+# ------------ Flywheel ----------- #
 
 def when_started3():
     if controller_1.buttonDown.pressing():
@@ -296,9 +306,9 @@ def when_started6():
     else:
         IntakeSpin.stop()
 
-# ------------------------------------ #
+# --------------------------------- #
 
-# ------------- Intake ------------- #
+# ------------- Intake ------------ #
 
 def when_started7():
     if controller_1.buttonL1.pressing():
@@ -313,15 +323,14 @@ def when_started8():
     else:
         IntakeSpin.stop()
 
-# ---------------------------------- #
+# --------------------------------- #
 
-# ------------------------------------------------------ #
+# ----------------------------------------------------- #
 
 
-
-# ------------- Autonomous Code for Fifteen Second and One Minute ------------- #
-        
-# ------------- Both Autons ------------- #
+# ---------------- All Autonomous Code ---------------- #
+  
+# ---------- Both Autons ---------- #
 
 # This is code applicable for both the one
 # minute auton and fifteen second auton
@@ -367,9 +376,9 @@ def touch_elev_bar():
     # Touch Elevation Bar
     drivetrain.drive_for(FORWARD, 54, INCHES)
 
-# --------------------------------------- #
+# --------------------------------- #
 
-# ------------- Only One Min Auton ------------- #
+# ------- Only One Min Auton ------ #
 
 # Only use this for the one minute auton,
 # since it exceeds fifteen seconds in the
@@ -384,14 +393,14 @@ def one_min_auton_second_triball():
     drivetrain.drive_for(FORWARD, 48, INCHES)
     IntakeSpin.spin(REVERSE) # score triball
 
-# ---------------------------------------------- #
+# --------------------------------- #
 
-# ------------- Call and Define Final Main Functions ------------- #
+# ------ Final Main Functions ----- #
 
 # Call the functions above in the respsective autons
 # below, finally calling it in the main auton function
 
-# ------------- Fifteen Second ------------- #
+# ----- Fifteen Second ----- #
 
 def fifteen_second_auton():
 
@@ -406,9 +415,9 @@ def fifteen_second_auton():
     knock_triball()
     touch_elev_bar()
 
-# ------------------------------------------ #
+# -------------------------- #
 
-# ------------- One Minute ------------- #
+# ------- One Minute ------- #
 
 def one_min_auton():
 
@@ -419,14 +428,14 @@ def one_min_auton():
     score_triball()
     one_min_auton_second_triball()
 
-# -------------------------------------- #
+# -------------------------- #
 
 # Call the autonomous function below, either
 # the fifteen_second_auton() or the 
 # one_min_auton(), change it before skills
 # or a match so the right one runs
 
-# ------------- Main Auton Function ------------- #
+# ------- Main Auton ------- #
 
 # This is the final main auton function that will
 # end up running in the actual competition
@@ -443,13 +452,13 @@ def onauton_autonomous_0():
     # call fifteen_second_auton() function, If you
     # want the one min auton, call one_min_auton()
 
-# ---------------------------------------------------------------- #
+# -------------------------- #
 
-# ----------------------------------------------------------------------------- #
+# ----------------------------------------------------- #
 
 
 
-# ------------- Call Driver and Autonomous for Competition - Do Not Touch ------------- #
+# ----- Call Driver and Autonomous - Do Not Touch ----- #
 
 # Call the main, overall autonomous function - do not touch this
 def vexcode_auton_function():
@@ -471,11 +480,11 @@ competition = Competition(vexcode_driver_function, vexcode_auton_function)
 # Calibrate the Drivetrain - do not touch this
 calibrate_drivetrain()
 
-# ------------------------------------------------------------------------------------- #
+# ----------------------------------------------------- #
 
 
 
-# ------------- System Event Handlers ------------- #
+# --------------- System Event Handlers --------------- #
 
 # these commands call the functions defined above
 # note: add a new line below 
@@ -502,7 +511,7 @@ ws7 = Thread(when_started7)
 ws8 = Thread(when_started8)
 when_started1() # Intial Setup Function
 
-# -------------------------------------------------- #
+# ----------------------------------------------------- #
 
 # ****************************************************************************************************** #
 
