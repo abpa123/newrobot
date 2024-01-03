@@ -35,6 +35,9 @@ brain=Brain()
 direction = False
 
 # Robot configtguration code
+
+# ------------- Controller and Drivetrain ------------- #
+
 controller_1 = Controller(PRIMARY)
 left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, direction)
 left_motor_b = Motor(Ports.PORT10, GearSetting.RATIO_6_1, direction)
@@ -44,10 +47,17 @@ right_motor_b = Motor(Ports.PORT9, GearSetting.RATIO_6_1, not direction)
 right_drive_smart = MotorGroup(right_motor_a, right_motor_b)
 drivetrain_inertial = Inertial(Ports.PORT21) # change port number
 drivetrain = SmartDrive(left_drive_smart, right_drive_smart, drivetrain_inertial, 319.19, 320, 40, MM, 1)
+
+# ----------------------------------------------------- #
+
+# ------------- Mechanisms ------------- #
+
 IntakeSpin = Motor(Ports.PORT11, GearSetting.RATIO_6_1, direction)
 FlywheelUpDown = Motor(Ports.PORT12, GearSetting.RATIO_6_1, direction)
 Flywheel = Motor(Ports.PORT1, GearSetting.RATIO_6_1, direction)
 sideskirt = DigitalOut(brain.three_wire_port.h)
+
+# -------------------------------------- #
 
 # ---------------------------------------------------- #
 
