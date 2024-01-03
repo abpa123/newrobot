@@ -22,26 +22,34 @@ This is currently a private repository so ask the owner to get access to its fil
 
 ## Important Notes on editing the code
 
-There are a few main sections you may find yourself editing when working on the code. These are:
+There are a few main sections you may find yourself editing when working on the code. There are specific sections in the code that should not be edited because the VEX robot relies on this code being there for certain crucial functions to work. However, most of the code is meant to be changed and the steps for editing and adding code to these sections are outlined in the descriptions below. 
 
 ### The Robot Initialization Code
-This is an important part of the code that needs to be handled with care. It looks something like this:
+This is the section of the robot code where all initial mechanisms and functions are defined. It is where all devices, as VEX refers to them, should be defined and eventually used in the program when defining functions in the controller code. It looks like this:
 
 ```
-# Robot configtguration code
+# ------------- Controller and Drivetrain ------------- #
+
 controller_1 = Controller(PRIMARY)
-left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, False)
-left_motor_b = Motor(Ports.PORT10, GearSetting.RATIO_6_1, False)
+left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, direction)
+left_motor_b = Motor(Ports.PORT10, GearSetting.RATIO_6_1, direction)
 left_drive_smart = MotorGroup(left_motor_a, left_motor_b)
-right_motor_a = Motor(Ports.PORT8, GearSetting.RATIO_6_1, True)
-right_motor_b = Motor(Ports.PORT9, GearSetting.RATIO_6_1, True)
+right_motor_a = Motor(Ports.PORT8, GearSetting.RATIO_6_1, not direction)
+right_motor_b = Motor(Ports.PORT9, GearSetting.RATIO_6_1, not direction)
 right_drive_smart = MotorGroup(right_motor_a, right_motor_b)
-drivetrain_inertial = Inertial(Ports.PORT21)
+drivetrain_inertial = Inertial(Ports.PORT21) # change port number
 drivetrain = SmartDrive(left_drive_smart, right_drive_smart, drivetrain_inertial, 319.19, 320, 40, MM, 1)
-IntakeSpin = Motor(Ports.PORT11, GearSetting.RATIO_6_1, False)
-FlywheelUpDown = Motor(Ports.PORT12, GearSetting.RATIO_6_1, False)
-Flywheel = Motor(Ports.PORT1, GearSetting.RATIO_6_1, False)
+
+# ----------------------------------------------------- #
+
+# ------------- Mechanisms ------------- #
+
+IntakeSpin = Motor(Ports.PORT11, GearSetting.RATIO_6_1, direction)
+FlywheelUpDown = Motor(Ports.PORT12, GearSetting.RATIO_6_1, direction)
+Flywheel = Motor(Ports.PORT1, GearSetting.RATIO_6_1, direction)
 sideskirt = DigitalOut(brain.three_wire_port.h)
+
+# -------------------------------------- #
 ```
 
 To add a device or change the code, add your device below and add the corresponding code such as `DigitalOut()` or `Motor()`. Then define a function that uses that device later in the `main.py` code file and finally call it in the system event handlers. It will not work without these steps.
@@ -85,9 +93,18 @@ Note that everything eventually should be called in the system event handlers ei
 
 ### Autonomous Code
 
-The Autonomous Code is broken down into many functions in order to allow for better testing and the creation of new functions. VEX primarily has only two main times pre-programmed code is run. This is in the fifteen second autonomous and the one minute autonomous skills challenge. There is a section in the code deemed "Both Autons" which is code applicable for both of these autonomous programs. Then there is the "One Min Auton" part, which is only to be used for the skills challenge. There is a section where two seperate functions for the two different autonomous instances are defined and it it finally called in the main autonomous function called `onauton_autonomous_0()`. It is called later in the `vexcode_auton_function()`. The layout for this main calling and defining of the bigger main functions looks like this:
+The Autonomous Code is broken down into many functions in order to allow for better testing and the creation of new functions. VEX primarily has only two main times pre-programmed code is run. This is in the fifteen second autonomous and the one minute autonomous skills challenge. There is a section in the code deemed "Both Autons" which is code applicable for both of these autonomous programs. Then there is the "One Min Auton" part, which is only to be used for the skills challenge. 
+
+There is a section where two seperate functions for the two different autonomous instances are defined and it it finally called in the main autonomous function, `onauton_autonomous_0()`. This function is called later in the `vexcode_auton_function()`, which is was runs when autonomous is enabled during competition. The layout for this main calling and defining of the bigger main functions looks like this:
 
 ```
+# ------------- Call and Define Final Main Functions ------------- #
+
+# Call the functions above in the respsective autons
+# below, finally calling it in the main auton function
+
+# ------------- Fifteen Second ------------- #
+
 def fifteen_second_auton():
 
     # This ends up scoring the matchload,
@@ -101,6 +118,9 @@ def fifteen_second_auton():
     knock_triball()
     touch_elev_bar()
 
+# ------------------------------------------ #
+
+# ------------- One Minute ------------- #
 
 def one_min_auton():
 
@@ -111,14 +131,23 @@ def one_min_auton():
     score_triball()
     one_min_auton_second_triball()
 
+# -------------------------------------- #
 
 # Call the autonomous function below, either
 # the fifteen_second_auton() or the 
 # one_min_auton(), change it before skills
 # or a match so the right one runs
 
+# ------------- Main Auton Function ------------- #
+
+# This is the final main auton function that will
+# end up running in the actual competition
 
 def onauton_autonomous_0():
+
+    # This ends up initilizating velocities,
+    # and it calls the autonomous function
+
     initialization() # needed for both autons
     fifteen_second_auton()
 
@@ -126,6 +155,7 @@ def onauton_autonomous_0():
     # call fifteen_second_auton() function, If you
     # want the one min auton, call one_min_auton()
 
+# ---------------------------------------------------------------- #
 ```
 
 ### All other Code
@@ -134,7 +164,8 @@ The driver and autonomous code is the main code that will be edited, however the
 
 ## Documentation
 
-While the visual studio code extension does not have much documentation or support, it is actually the same as the vexcode v5 app. The code is the same thing and vexcode v5 has documentation built in. In the app, or the web version, simply click the "?" to figure out what a command does and all the paramaters it uses. The vexcode v5 app commands are the same as the vscode extension commands. To access the web version go to https://codev5.vex.com/ and to download the app go here: https://www.vexrobotics.com/vexcode/install/v5 and download it for your operating system.
+
+> While the visual studio code extension does not have much documentation or support, it is actually the same as the vexcode v5 app. The code is the same thing and vexcode v5 has documentation built in. In the app, or the web version, simply click the "?" to figure out what a command does and all the paramaters it uses. The vexcode v5 app commands are the same as the vscode extension commands. To access the web version go to https://codev5.vex.com/ and to download the app go here: https://www.vexrobotics.com/vexcode/install/v5 and download it for your operating system.
 
 
 
