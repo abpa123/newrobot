@@ -101,6 +101,11 @@ def rc_auto_loop_function_controller_1():
     
     # ------------- Drivetrain Code ------------- #
 
+    # This code simply makes sure that the Drivetrain
+    # functions as it should, starting and stopping
+    # when needed and takes care of the inertial
+    # sensor in the middle of the robot
+
     while True:
         if remote_control_code_enabled:
             if drivetrain_inertial.is_calibrating():
@@ -135,6 +140,12 @@ def rc_auto_loop_function_controller_1():
     # ------------------------------------------- #
 
             # ------------- Intake Code ------------- #
+                
+            # This code simply makes sure that the Intake
+            # functions as it should, starting and stopping
+            # when needed, to adjust directions change the
+            # values for .spin() in both this and the
+            # controller code below
             
             if controller_1.buttonL1.pressing():
                 IntakeSpin.spin(FORWARD)
@@ -148,8 +159,13 @@ def rc_auto_loop_function_controller_1():
 
             # --------------------------------------- #
 
-
             # ------------- Flywheel Code ------------- #
+            
+            # This code simply makes sure that the Flywheel
+            # functions as it should, starting and stopping
+            # when needed, to adjust directions change the
+            # values for .spin() in both this and the
+            # controller code below
 
             if controller_1.buttonR1.pressing():
                 Flywheel.spin(FORWARD)
@@ -192,8 +208,7 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 # The following functions are commands for the 
 # controller to perform functions
 
-
-# How to define new function in this code:
+# ------------- Define a Function ------------- #
 
 # def when_started#(): (continue the convention)
 #   insert code here...
@@ -204,8 +219,14 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 
 # Note if you do this then you have to tell VEX
 # in the system event handlers, like this:
-# controller_1.buttonA.pressed(onevent_the_rest...)
+# controller_1.buttonA.pressed(onevent...)
 
+# --------------------------------------------- #
+
+# All code here should be called in system event 
+# handlers below eventually, regardless of function type
+
+# ------------- Setup ------------- #
 
 def when_started1():
     drivetrain.set_drive_velocity(100, PERCENT)
@@ -214,18 +235,26 @@ def when_started1():
     FlywheelUpDown.set_velocity(70, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
 
+# --------------------------------- #
+
+# ------------- Wings ------------- #
 
 def when_started2():
     sideskirt.set(False) # orginally set to closed
 
+# Define functions for wings that use
+# on the letter buttons on controller
 
 def onevent_controller_1buttonX_pressed_0():
     sideskirt.set(True) # when X pressed, open wings
 
 
 def onevent_controller_1buttonY_pressed_0():
-    sideskirt.set(False) # when y pressed, close wings
+    sideskirt.set(False) # when Y pressed, close wings
 
+# --------------------------------- #
+
+# ------------- Flywheel ------------- #
 
 def when_started3():
     if controller_1.buttonDown.pressing():
@@ -240,41 +269,52 @@ def when_started4():
     else:
         FlywheelUpDown.stop()
 
+
 def when_started5():
-    if controller_1.buttonL1.pressing():
-        IntakeSpin.spin(FORWARD)
-    else:
-        IntakeSpin.stop()
-
-
-def when_started6():
-    if controller_1.buttonL2.pressing():
-        IntakeSpin.spin(REVERSE)
-    else:
-        IntakeSpin.stop()
-
-
-def when_started7():
     if controller_1.buttonR2.pressing():
         Flywheel.spin(REVERSE)
     else:
         Flywheel.stop()
 
 
-def when_started8():
+def when_started6():
     if controller_1.buttonR1.pressing():
         Flywheel.spin(FORWARD)
     else:
         IntakeSpin.stop()
 
-# --------------------------------------- #
+# ------------------------------------ #
+
+# ------------- Intake ------------- #
+
+def when_started7():
+    if controller_1.buttonL1.pressing():
+        IntakeSpin.spin(FORWARD)
+    else:
+        IntakeSpin.stop()
+
+
+def when_started8():
+    if controller_1.buttonL2.pressing():
+        IntakeSpin.spin(REVERSE)
+    else:
+        IntakeSpin.stop()
+
+# ---------------------------------- #
+
+# ------------------------------------------------------ #
 
 
 
-# ------------- Autonomous Code ------------- #
+# ------------- Autonomous Code for Fifteen Second and One Minute ------------- #
+        
+# ------------- Both Autons ------------- #
+
+# This is code applicable for both the one
+# minute auton and fifteen second auton
 
 def initialization():
-    # Set everything up, set velocities
+    # Set everything up, Set velocities
     drivetrain.set_drive_velocity(100, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
     IntakeSpin.set_velocity(100, PERCENT)
@@ -282,22 +322,26 @@ def initialization():
     Flywheel.set_velocity(100, PERCENT)
 
 
-def score_triballs():
-    # Score Matchloads, Intake Two Triballs and score them
+def score_matchload():
+    # Score Matchload in close goal
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 12, INCHES)
     IntakeSpin.spin(REVERSE) # score matchload
+
+
+def score_triball():
+    # Intake One Triball and score it
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 24, INCHES)
-    IntakeSpin.spin(FORWARD) # intake first triball
+    IntakeSpin.spin(FORWARD) # intake triball
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 24, INCHES)
-    IntakeSpin.spin(REVERSE) # first triball scored
+    IntakeSpin.spin(REVERSE) # score triball
 
 
 def knock_triball():
-    # Go to bottom corner, knock triball out using wings
+    # Go to bottom corner, Knock triball out of match load zone using wings
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(RIGHT, 90, DEGREES)
@@ -306,52 +350,76 @@ def knock_triball():
     drivetrain.turn_for(RIGHT, 360, DEGREES) # knocks triball out
 
 
-def touch_bar():
-    # Touch Bar
+def touch_elev_bar():
+    # Touch Elevation Bar
     drivetrain.drive_for(FORWARD, 54, INCHES)
 
+# --------------------------------------- #
+
+# ------------- One Min Auton ------------- #
+
+# Only use this for the one minute auton,
+# since it exceeds fifteen seconds in the
+# normal match autonomous
 
 def one_min_auton_second_triball():
-    # only to be used in the one minute, the fifteen second is too long
+    # Intake another triball and score it
     drivetrain.turn_for(LEFT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 48, INCHES)
-    IntakeSpin.spin(FORWARD) # intake second triball
+    IntakeSpin.spin(FORWARD) # intake triball
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 48, INCHES)
-    IntakeSpin.spin(REVERSE) # second triball scored
+    IntakeSpin.spin(REVERSE) # score triball
 
+# ----------------------------------------- #
 
-# Put all the code for the auton in respsective functions
-    
+# ------------- Call and Define Final Functions ------------- #
+
+# Call the functions above in the respsective autons
+# below, finally calling it in the main auton function
+
 
 def fifteen_second_auton():
-    initialization()
-    score_triballs()
+
+    # This ends up scoring the matchload,
+    # intaking and scoring one triball,
+    # knocking the triball in the match
+    # load zone out, and touching the 
+    # elevation bar
+
+    score_matchload()
+    score_triball()
     knock_triball()
-    touch_bar()
+    touch_elev_bar()
 
 
 def one_min_auton():
-    initialization()
-    score_triballs()
+
+    # This ends up scoring the matchload,
+    # and intaking and scoring two triballs
+
+    score_matchload()
+    score_triball()
     one_min_auton_second_triball()
-    knock_triball()
-    # touch_bar() might not be needed
 
 
-# Add in auton code in the function below here
-# Define seperate functions to make code readable
-# above, make sure to call them in function below
+# Call the autonomous function below, either
+# the fifteen_second_auton() or the 
+# one_min_auton(), change it before skills
+# or a match so the right one runs
 
 
 def onauton_autonomous_0():
+    initialization() # needed for both autons
     fifteen_second_auton()
 
     # when you want to run the 15 second autonomous,
     # call fifteen_second_auton() function, If you
     # want the one min auton, call one_min_auton()
 
-# ------------------------------------------------------ #
+# ----------------------------------------------------------- #
+
+# ----------------------------------------------------------------------------- #
 
 
 
@@ -359,7 +427,7 @@ def onauton_autonomous_0():
 
 # Call the autonomous function - do not touch this
 def vexcode_auton_function():
-    auton_task_0 = Thread(onauton_autonomous_0)
+    auton_task_0 = Thread(onauton_autonomous_0) # call main auton function
     while(competition.is_autonomous() and competition.is_enabled()):
         wait(10, MSEC)
     auton_task_0.stop()
@@ -372,7 +440,7 @@ def vexcode_driver_function():
 
 
 # register the competition functions - do not touch this
-competition = Competition( vexcode_driver_function, vexcode_auton_function )
+competition = Competition(vexcode_driver_function, vexcode_auton_function)
 
 # Calibrate the Drivetrain - do not touch this
 calibrate_drivetrain()
@@ -399,17 +467,16 @@ wait(15, MSEC)
 # (including new ones you defined), VEX abbreviates the 
 # "when started #" functions "ws#", follow convention
 
-ws2 = Thread( when_started2 )
-ws3 = Thread( when_started3 )
-ws4 = Thread( when_started4 )
-ws5 = Thread( when_started5 )
-ws6 = Thread( when_started6 )
-ws7 = Thread( when_started7 )
-ws8 = Thread( when_started8 )
+ws2 = Thread(when_started2)
+ws3 = Thread(when_started3)
+ws4 = Thread(when_started4)
+ws5 = Thread(when_started5)
+ws6 = Thread(when_started6)
+ws7 = Thread(when_started7)
+ws8 = Thread(when_started8)
 when_started1()
 
 # -------------------------------------------------- #
 
 # ****************************************************************************************************** #
 
-        
