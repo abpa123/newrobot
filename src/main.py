@@ -34,7 +34,7 @@ brain = Brain()
 
 direction = False
 
-# Robot configtguration code
+# Robot configuration code
 
 # ------------- Controller and Drivetrain ------------- #
 
