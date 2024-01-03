@@ -1,17 +1,19 @@
 # VEX Team 21919A Github Repository
 
 This is home of VEX Team 21919A's code, where all the code for their new robot lies. This is the code used for the robot redesign that utilized a flywheel 
-in comparison to the catapult used before.
+in comparison to the catapult used before. The below description will outline how to get access to this repository, what and what not to edit in the robot code, as well as how to find documentation that will aid you in editing the code in this Github Repository.
 
 ## How to Get Access to this Repository
 
 There are multiple steps that need to be taken to use this github repository. They are the following:
+> [!TIP]
 > 1. Download Github Desktop. You can do this by going to https://desktop.github.com/ and downloading their software.
 > 2. Open on Github Desktop. Once you have github desktop downloaded go to the github repository and look for the button that says "<> Code". The dropdown should allow you to "Open on Github Desktop".
 > 3. Clone Repository. The popup should allow you to hit the clone button, which despite the wording actully simply opens it on your device and does not create a new version.
 
 By completing the above steps you should be able to hit "Open in Visual Studio Code". There are some important catches though.
 
+> [!IMPORTANT]
 > Note: You need the following things in order to use the Repository
 > 1. You may see in Github Desktop something other than Visual Studio Code, such as PyCharm. The code only works on Visual Studio Code. To change the app you open the repository with, simply go to Settings, Integration and change the external editor you are using.
 > 2. In Visual Studio Code you need to have the VEX extension downloaded. For the code to download to a robot, or for it to actually run, you will need the Visual Studio Code extension downloaded. To do this, go to the extensions tab and search up "VEX". Look for the official VEX extension and download it. 
@@ -83,15 +85,9 @@ Note that everything eventually should be called in the system event handlers ei
 
 ### Autonomous Code
 
-The Autonomous Code is broken down into many functions in order to allow for better testing and the creation of new functions. VEX primarily has only two main times pre-programmed code is run. This is in the fifteen second autonomous and the one minute autonomous skills challenge. There is a section in the code deemed `Both Autons` which is code applicable for both of these autonomous programs. Then there is the `One Min Auton` part, which is only to be used for the skills challenge. There is a section where two seperate functions for the two different autonomous instances are defined and it it finally called in the main autonomous function called `onauton_autonomous_0()`. It is called later in the `vexcode_auton_function()`. The layout for this main calling and defining of the bigger main functions looks like this:
+The Autonomous Code is broken down into many functions in order to allow for better testing and the creation of new functions. VEX primarily has only two main times pre-programmed code is run. This is in the fifteen second autonomous and the one minute autonomous skills challenge. There is a section in the code deemed "Both Autons" which is code applicable for both of these autonomous programs. Then there is the "One Min Auton" part, which is only to be used for the skills challenge. There is a section where two seperate functions for the two different autonomous instances are defined and it it finally called in the main autonomous function called `onauton_autonomous_0()`. It is called later in the `vexcode_auton_function()`. The layout for this main calling and defining of the bigger main functions looks like this:
 
 ```
-# ------------- Call and Define Final Functions ------------- #
-
-# Call the functions above in the respsective autons
-# below, finally calling it in the main auton function
-
-
 def fifteen_second_auton():
 
     # This ends up scoring the matchload,
@@ -130,7 +126,6 @@ def onauton_autonomous_0():
     # call fifteen_second_auton() function, If you
     # want the one min auton, call one_min_auton()
 
-# ----------------------------------------------------------- #
 ```
 
 ### All other Code
@@ -140,8 +135,6 @@ The driver and autonomous code is the main code that will be edited, however the
 ## Documentation
 
 While the visual studio code extension does not have much documentation or support, it is actually the same as the vexcode v5 app. The code is the same thing and vexcode v5 has documentation built in. In the app, or the web version, simply click the "?" to figure out what a command does and all the paramaters it uses. The vexcode v5 app commands are the same as the vscode extension commands. To access the web version go to https://codev5.vex.com/ and to download the app go here: https://www.vexrobotics.com/vexcode/install/v5 and download it for your operating system.
-
-
 
 
 
