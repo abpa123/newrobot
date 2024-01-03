@@ -83,7 +83,7 @@ Note that everything eventually should be called in the system event handlers ei
 
 ### Autonomous Code
 
-The Autonomous Code is broken down into many functions in order to allow for better testing and the creation of new functions. VEX primarily has only two main times pre-programmed code is run. This is in the fifteen second autonomous and the one minute autonomous skills challenge. There is a section in the code deemed `Both Autons` which is code applicable for both of these autonomous programs. Then there is the `One Min Auton` part, which is only to be used for the skills challenge. There is a section where two seperate functions for the two different autonomous instances are defined and it it finally called in the main autonomous function called `onauton_autonomous_0`. The layout is like this:
+The Autonomous Code is broken down into many functions in order to allow for better testing and the creation of new functions. VEX primarily has only two main times pre-programmed code is run. This is in the fifteen second autonomous and the one minute autonomous skills challenge. There is a section in the code deemed `Both Autons` which is code applicable for both of these autonomous programs. Then there is the `One Min Auton` part, which is only to be used for the skills challenge. There is a section where two seperate functions for the two different autonomous instances are defined and it it finally called in the main autonomous function called `onauton_autonomous_0()`. It is called later in the `vexcode_auton_function()`. The layout for this main calling and defining of the bigger main functions looks like this:
 
 ```
 # ------------- Call and Define Final Functions ------------- #
