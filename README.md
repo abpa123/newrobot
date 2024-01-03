@@ -82,14 +82,14 @@ def onevent_controller_1buttonX_pressed_0():
     insert code here...
 ```
 
-Then use this code later in the system event handlers by telling VEX that you are using that button and when that button is pressed, call the function you defined earlier. The function that will call is that `onevent_controller_1buttonX_pressed_0()` function. You can do this in the system event handlers by doing something like this, instead with your function name:
+Then use this code later in the system event handlers by telling VEX that you are using that button and when that button is pressed, call the function you defined earlier. In this example, the function that will call is that `onevent_controller_1buttonX_pressed_0()` function. You can do this in the system event handlers by doing something like this, instead with your function name, which should be named similarly:
 
 
 ```
 controller_1.buttonX.pressed(onevent_controller_1buttonX_pressed_0)
 ```
 
-Note that everything eventually should be called in the system event handlers either by using the `ws2 = Thread(when_started2)` approach or the `controller_1.buttonX.pressed(onevent...` version depending on the type of event being executed. Use the second type when trying to execute an action using one of the letter buttons.
+Note that everything eventually should be called in the system event handlers, in order for the function defined in the controller code to run in the first place, either by using the `ws2 = Thread(when_started2)` approach or the `controller_1.buttonX.pressed(onevent...` version depending on the type of event being executed. Use the second type when trying to execute an action using one of the letter buttons.
 
 ### Autonomous Code
 
