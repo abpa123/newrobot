@@ -10,7 +10,7 @@
 # region VEXcode Generated Robot Configuration
 from vex import *
 
-brain=Brain()
+brain = Brain()
 
 
 # ------------- Robot Initialization Code ------------- #
@@ -68,6 +68,8 @@ sideskirt = DigitalOut(brain.three_wire_port.h)
 # wait for rotation sensor to fully initialize
 wait(30, MSEC)
 
+# ------------- Calibrate and Define Motors ------------- #
+
 def calibrate_drivetrain():
     # Calibrate the Drivetrain Inertial
     sleep(200, MSEC)
@@ -97,11 +99,14 @@ controller_1_up_down_buttons_control_motors_stopped = True
 drivetrain_l_needs_to_be_stopped_controller_1 = False
 drivetrain_r_needs_to_be_stopped_controller_1 = False
 
+# ------------------------------------------------------- #
 
-# I added backslashes to make the global span over multiple lines
-# Remove the "\" on each line and make it one singular line if it causes problems
 
 def rc_auto_loop_function_controller_1():
+
+    # I added backslashes to make the global span over multiple lines
+    # Remove the "\" on each line and make it one singular line if it causes problems
+
     global drivetrain_l_needs_to_be_stopped_controller_1, \
     drivetrain_r_needs_to_be_stopped_controller_1, \
     controller_1_left_shoulder_control_motors_stopped, \
