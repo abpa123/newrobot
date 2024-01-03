@@ -7,7 +7,7 @@
 #                                                                              #
 # ---------------------------------------------------------------------------- #
 
-#region VEXcode Generated Robot Configuration
+# region VEXcode Generated Robot Configuration
 from vex import *
 
 brain=Brain()
@@ -30,7 +30,7 @@ brain=Brain()
 # False is counterclockwise, Normal in vexcode v5
 # True is clockwise, Reverse in vexcode v5
 
-# drivetrain should be two direction, two not direction
+# drivetrain should be two direction and two not direction
 
 direction = False
 
@@ -195,10 +195,8 @@ remote_control_code_enabled = True
 
 rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 
-#endregion VEXcode Generated Robot Configuration
-
-
 # ******************************************************************************************************** #
+# endregion VEXcode Generated Robot Configuration
 
 
 # **************************************** START OF ACTUAL CODE **************************************** #
@@ -356,7 +354,7 @@ def touch_elev_bar():
 
 # --------------------------------------- #
 
-# ------------- One Min Auton ------------- #
+# ------------- Only One Min Auton ------------- #
 
 # Only use this for the one minute auton,
 # since it exceeds fifteen seconds in the
@@ -371,13 +369,14 @@ def one_min_auton_second_triball():
     drivetrain.drive_for(FORWARD, 48, INCHES)
     IntakeSpin.spin(REVERSE) # score triball
 
-# ----------------------------------------- #
+# ---------------------------------------------- #
 
-# ------------- Call and Define Final Functions ------------- #
+# ------------- Call and Define Final Main Functions ------------- #
 
 # Call the functions above in the respsective autons
 # below, finally calling it in the main auton function
 
+# ------------- Fifteen Second ------------- #
 
 def fifteen_second_auton():
 
@@ -392,6 +391,9 @@ def fifteen_second_auton():
     knock_triball()
     touch_elev_bar()
 
+# ------------------------------------------ #
+
+# ------------- One Minute ------------- #
 
 def one_min_auton():
 
@@ -402,14 +404,23 @@ def one_min_auton():
     score_triball()
     one_min_auton_second_triball()
 
+# -------------------------------------- #
 
 # Call the autonomous function below, either
 # the fifteen_second_auton() or the 
 # one_min_auton(), change it before skills
 # or a match so the right one runs
 
+# ------------- Main Auton Function ------------- #
+
+# This is the final main auton function that will
+# end up running in the actual competition
 
 def onauton_autonomous_0():
+
+    # This ends up initilizating velocities,
+    # and it calls the autonomous function
+
     initialization() # needed for both autons
     fifteen_second_auton()
 
@@ -417,15 +428,15 @@ def onauton_autonomous_0():
     # call fifteen_second_auton() function, If you
     # want the one min auton, call one_min_auton()
 
-# ----------------------------------------------------------- #
+# ---------------------------------------------------------------- #
 
 # ----------------------------------------------------------------------------- #
 
 
 
-# ------------- Call Driver and Autonomous in Competition - Do Not Touch ------------- #
+# ------------- Call Driver and Autonomous for Competition - Do Not Touch ------------- #
 
-# Call the autonomous function - do not touch this
+# Call the main, overall autonomous function - do not touch this
 def vexcode_auton_function():
     auton_task_0 = Thread(onauton_autonomous_0) # call main auton function
     while(competition.is_autonomous() and competition.is_enabled()):
@@ -433,7 +444,7 @@ def vexcode_auton_function():
     auton_task_0.stop()
 
 
-# Call the driver function - do not touch this
+# When it is the driver section, start driver functions - do not touch this
 def vexcode_driver_function():
     while(competition.is_driver_control() and competition.is_enabled()):
         wait(10, MSEC)
@@ -445,7 +456,7 @@ competition = Competition(vexcode_driver_function, vexcode_auton_function)
 # Calibrate the Drivetrain - do not touch this
 calibrate_drivetrain()
 
-# ------------------------------------------------------------------------------------ #
+# ------------------------------------------------------------------------------------- #
 
 
 
@@ -463,7 +474,7 @@ controller_1.buttonY.pressed(onevent_controller_1buttonY_pressed_0)
 # add 15ms delay to make sure events are registered correctly.
 wait(15, MSEC)
 
-# Call all the functions below 
+# Call all the when_started() functions below 
 # (including new ones you defined), VEX abbreviates the 
 # "when started #" functions "ws#", follow convention
 
@@ -474,7 +485,7 @@ ws5 = Thread(when_started5)
 ws6 = Thread(when_started6)
 ws7 = Thread(when_started7)
 ws8 = Thread(when_started8)
-when_started1()
+when_started1() # Intial Setup Function
 
 # -------------------------------------------------- #
 
