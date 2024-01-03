@@ -15,6 +15,8 @@ brain = Brain()
 
 # ------------- Robot Initialization Code ------------- #
 
+# ---------- Instructions --------- #
+
 # To add a new device do the following:
 # 1. Add a variable name and add the corresponding code
 # 2. Define a function below in the Actual Code section
@@ -30,11 +32,13 @@ brain = Brain()
 # False is counterclockwise, Normal in vexcode v5
 # True is clockwise, Reverse in vexcode v5
 
-# drivetrain should be two direction and two not direction
+# drivetrain set to two direction and two not direction
+
+# --------------------------------- #
+
+# Robot Configuration Code
 
 direction = False
-
-# Robot configuration code
 
 # --- Controller and Drivetrain --- #
 
@@ -90,8 +94,6 @@ def play_vexcode_sound(sound_name): # sound stuff, no need to touch this
 wait(200, MSEC)
 # clear the console to make sure we don't have the REPL in the console
 print("\033[2J")
-
-
 
 controller_1_left_shoulder_control_motors_stopped = True
 controller_1_right_shoulder_control_motors_stopped = True
@@ -163,11 +165,11 @@ def rc_auto_loop_function_controller_1():
 
             # ---------- Intake Code ---------- #
                 
-            # This code simply makes sure that the Intake
-            # functions as it should, starting and stopping
-            # when needed, to adjust directions change the
-            # values for .spin() in both this and the
-            # controller code below
+            # This code simply makes sure that the 
+            # Intake functions as it should, starting 
+            # and stopping when needed, to adjust 
+            # directions change values for .spin() 
+            # in both this and the controller code
             
             if controller_1.buttonL1.pressing():
                 IntakeSpin.spin(FORWARD)
@@ -183,11 +185,11 @@ def rc_auto_loop_function_controller_1():
 
             # --------- Flywheel Code --------- #
 
-            # This code simply makes sure that the Flywheel
-            # functions as it should, starting and stopping
-            # when needed, to adjust directions change the
-            # values for .spin() in both this and the
-            # controller code below
+            # This code simply makes sure that the 
+            # Flywheel functions as it should, starting 
+            # and stopping when needed, to adjust 
+            # directions change values for .spin() 
+            # in both this and the controller code
 
             if controller_1.buttonR1.pressing():
                 Flywheel.spin(FORWARD)
@@ -233,21 +235,21 @@ rc_auto_loop_thread_controller_1 = Thread(rc_auto_loop_function_controller_1)
 
 # ------- Define a Function ------- #
 
-# def when_started#(): (continue the convention)
-#   insert code here...
+# Method 1:
+# Define normal mechanism
+# def when_started[#]():
+#   [code for mechanism]
+# Call in system event handlers:
+# ws[#] = Thread(when_started[#])
 
-# You can also define functions for buttons:
+# Method 2:
+# Define functions for letter buttons:
 # def onevent_controller_1buttonA_pressed_0():
-#   insert code here to be executed when A hit
-
-# Note if you do this then you have to tell VEX
-# in the system event handlers, like this:
+#   [code to be executed when A pressed]
+# Call in system event handlers:
 # controller_1.buttonA.pressed(onevent...)
 
 # --------------------------------- #
-
-# All code here should be called in system event 
-# handlers below eventually, regardless of function type
 
 # ------------- Setup ------------- #
 
@@ -332,11 +334,13 @@ def when_started8():
   
 # ---------- Both Autons ---------- #
 
-# This is code applicable for both the one
-# minute auton and fifteen second auton
+# This is code applicable for both the 
+# one min auton and fifteen second auton
 
 def initialization():
+
     # Set everything up, Set velocities
+
     drivetrain.set_drive_velocity(100, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
     IntakeSpin.set_velocity(100, PERCENT)
@@ -345,7 +349,9 @@ def initialization():
 
 
 def score_matchload():
+
     # Score Matchload in close goal
+
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 12, INCHES)
@@ -353,7 +359,9 @@ def score_matchload():
 
 
 def score_triball():
+
     # Intake One Triball and score it
+
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 24, INCHES)
     IntakeSpin.spin(FORWARD) # intake triball
@@ -363,7 +371,10 @@ def score_triball():
 
 
 def knock_triball():
-    # Go to bottom corner, Knock triball out of match load zone using wings
+
+    # Go to corner, Knock triball out of 
+    # match load zone using wings
+
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(RIGHT, 90, DEGREES)
@@ -397,10 +408,11 @@ def one_min_auton_second_triball():
 
 # ------ Final Main Functions ----- #
 
-# Call the functions above in the respsective autons
-# below, finally calling it in the main auton function
+# Call the functions above in the 
+# respsective autons below, finally 
+# calling it in the main function
 
-# ----- Fifteen Second ----- #
+# ---- Fifteen Second ---- #
 
 def fifteen_second_auton():
 
@@ -415,9 +427,9 @@ def fifteen_second_auton():
     knock_triball()
     touch_elev_bar()
 
-# -------------------------- #
+# ------------------------ #
 
-# ------- One Minute ------- #
+# ------ One Minute ------ #
 
 def one_min_auton():
 
@@ -428,31 +440,29 @@ def one_min_auton():
     score_triball()
     one_min_auton_second_triball()
 
-# -------------------------- #
+# ------------------------ #
 
-# Call the autonomous function below, either
-# the fifteen_second_auton() or the 
-# one_min_auton(), change it before skills
-# or a match so the right one runs
+# Call the auton function below,
+# either the fifteen_second_auton()
+# or the  one_min_auton()
+    
+# Change function before skills
 
-# ------- Main Auton ------- #
+# ------ Main Auton ------ #
 
-# This is the final main auton function that will
-# end up running in the actual competition
+# This is the final main auton 
+# function that will end up 
+# running in competition
 
 def onauton_autonomous_0():
 
     # This ends up initilizating velocities,
     # and it calls the autonomous function
 
-    initialization() # needed for both autons
+    initialization()
     fifteen_second_auton()
 
-    # when you want to run the 15 second autonomous,
-    # call fifteen_second_auton() function, If you
-    # want the one min auton, call one_min_auton()
-
-# -------------------------- #
+# ------------------------ #
 
 # --------------------------------- #
 
