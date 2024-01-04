@@ -30,7 +30,6 @@ By completing the above steps you should be able to hit "Open in Visual Studio C
 > - You may see in Github Desktop something other than Visual Studio Code, such as PyCharm. The code only works on Visual Studio Code. To change the app you open the repository with, simply go to Settings, Integration and change the external editor you are using.
 > - In Visual Studio Code you need to have the VEX extension downloaded. For the code to download to a robot, or for it to actually run, you will need the Visual Studio Code extension downloaded. To do this, go to the extensions tab and search up "VEX". Look for the official VEX extension and download it. 
 
-This is currently a private repository so ask the owner to get access to its files. None of the above steps will work without this.
 
 ## Important Notes on editing the code
 
