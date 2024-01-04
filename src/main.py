@@ -267,7 +267,6 @@ def when_started1():
 def when_started2():
     sideskirt.set(False) # orginally set to closed
 
-# Define functions for wings that use
 # on the letter buttons on controller
 
 def onevent_controller_1buttonX_pressed_0():
