@@ -412,7 +412,7 @@ def one_min_auton_second_triball():
 # respsective autons below, finally 
 # calling it in the main function
 
-# ---- Fifteen Second ---- #
+# --- Fifteen Second --- #
 
 def fifteen_second_auton():
 
@@ -427,9 +427,9 @@ def fifteen_second_auton():
     knock_triball()
     touch_elev_bar()
 
-# ------------------------ #
+# ---------------------- #
 
-# ------ One Minute ------ #
+# ----- One Minute ----- #
 
 def one_min_auton():
 
@@ -440,7 +440,7 @@ def one_min_auton():
     score_triball()
     one_min_auton_second_triball()
 
-# ------------------------ #
+# ---------------------- #
 
 # Call the auton function below,
 # either the fifteen_second_auton()
@@ -448,7 +448,7 @@ def one_min_auton():
     
 # Change function before skills
 
-# ------ Main Auton ------ #
+# ----- Main Auton ----- #
 
 # This is the final main auton 
 # function that will end up 
@@ -462,7 +462,7 @@ def onauton_autonomous_0():
     initialization()
     fifteen_second_auton()
 
-# ------------------------ #
+# ---------------------- #
 
 # --------------------------------- #
 
