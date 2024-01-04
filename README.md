@@ -1,5 +1,4 @@
-‎‎‎
-# VEX Team 21919A Github Repository
+# ‎‎VEX Team 21919A Github Repository
 
 This is home of VEX Team 21919A's code, where all the code for their new robot lies. This repository houses the code that powers our innovative robot design, which features a flywheel mechanism for projectile launching. The code in this repository marks a significant departure from our previous catapult-based system. Read on to learn how to navigate this repository, contribute to the code, and access helpful documentation. 
 
