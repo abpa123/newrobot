@@ -335,6 +335,8 @@ def when_started8():
 
 # This is code applicable for both the 
 # one min auton and fifteen second auton
+# Intake Directions:
+# Reverse is intake, Forward is outtake
 
 def initialization():
 
@@ -355,9 +357,9 @@ def score_matchload():
     drivetrain.turn_for(RIGHT, 90, DEGREES)
     IntakeSpin.spin(FORWARD) # score matchload
     drivetrain.drive_for(FORWARD, 12, INCHES)
+    # wait(500, MSEC) # wait while scoring
     drivetrain.drive_for(REVERSE, 4, INCHES)
     wait(500, MSEC)
-    # drivetrain.drive_for(FORWARD, 1, INCHES)
 
 
 def score_triball():
@@ -365,30 +367,21 @@ def score_triball():
     # Intake One Triball and score it
     
     wait(50, MSEC)
-    IntakeSpin.spin(REVERSE)
+    IntakeSpin.spin(REVERSE) # start intaking while driving
     drivetrain.drive_for(REVERSE, 27, INCHES)
-    drivetrain.set_turn_velocity(50, PERCENT)
+    drivetrain.set_turn_velocity(50, PERCENT) # lower turn velocity
     drivetrain.turn_for(LEFT, 90, DEGREES)
     drivetrain.set_drive_velocity(15, PERCENT)
-    IntakeSpin.spin(REVERSE)
     drivetrain.drive_for(FORWARD, 12, INCHES)
     drivetrain.set_drive_velocity(80, PERCENT)
     IntakeSpin.spin(REVERSE) # intake triball
-    wait(500, MSEC)
+    wait(500, MSEC) # wait while intaking
     drivetrain.drive_for(REVERSE, 12, INCHES)
     drivetrain.turn_for(RIGHT, 90, DEGREES)
-
     drivetrain.drive_for(FORWARD, 20, INCHES)
-    IntakeSpin.spin(FORWARD)
-    wait(500, MSEC)
-    drivetrain.drive_for(FORWARD, 6, INCHES)
-
-    # drivetrain.set_turn_velocity(80, PERCENT)
-
-
-    # drivetrain.turn_for(RIGHT, 180, DEGREES)
-    # drivetrain.drive_for(FORWARD, 24, INCHES)
-    # IntakeSpin.spin(REVERSE) # score triball
+    IntakeSpin.spin(FORWARD) # score triball
+    wait(500, MSEC) # wait while scoring
+    drivetrain.drive_for(FORWARD, 6, INCHES) # push triball in
 
 
 def knock_triball():
@@ -396,11 +389,10 @@ def knock_triball():
     # Go to corner, Knock triball out of 
     # match load zone using wings
 
-    drivetrain.turn_for(LEFT, 90, DEGREES)
-    drivetrain.drive_for(FORWARD, 60, INCHES)
     drivetrain.turn_for(RIGHT, 90, DEGREES)
-    drivetrain.drive_for(FORWARD, 6, INCHES) # change this number
+    drivetrain.drive_for(FORWARD, 98, INCHES)
     sideskirt.set(True) # deploy wings
+    drivetrain.set_turn_velocity(100, PERCENT)
     drivetrain.turn_for(RIGHT, 360, DEGREES) # knocks triball out
 
 
