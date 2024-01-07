@@ -43,13 +43,13 @@ direction = False
 # --- Controller and Drivetrain --- #
 
 controller_1 = Controller(PRIMARY)
-left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, direction)
-left_motor_b = Motor(Ports.PORT10, GearSetting.RATIO_6_1, direction)
+left_motor_a = Motor(Ports.PORT9, GearSetting.RATIO_6_1, not direction)
+left_motor_b = Motor(Ports.PORT8, GearSetting.RATIO_6_1, not direction)
 left_drive_smart = MotorGroup(left_motor_a, left_motor_b)
-right_motor_a = Motor(Ports.PORT8, GearSetting.RATIO_6_1, not direction)
-right_motor_b = Motor(Ports.PORT9, GearSetting.RATIO_6_1, not direction)
+right_motor_a = Motor(Ports.PORT10, GearSetting.RATIO_6_1, direction)
+right_motor_b = Motor(Ports.PORT7, GearSetting.RATIO_6_1, direction)
 right_drive_smart = MotorGroup(right_motor_a, right_motor_b)
-drivetrain_inertial = Inertial(Ports.PORT21) # change port number
+drivetrain_inertial = Inertial(Ports.PORT13) # change port number
 drivetrain = SmartDrive(left_drive_smart, right_drive_smart, drivetrain_inertial, 319.19, 320, 40, MM, 1)
 
 # --------------------------------- #
@@ -340,7 +340,7 @@ def initialization():
 
     # Set everything up, Set velocities
 
-    drivetrain.set_drive_velocity(100, PERCENT)
+    drivetrain.set_drive_velocity(80, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
     IntakeSpin.set_velocity(100, PERCENT)
     FlywheelUpDown.set_velocity(70, PERCENT)
@@ -351,22 +351,44 @@ def score_matchload():
 
     # Score Matchload in close goal
 
-    drivetrain.drive_for(FORWARD, 60, INCHES)
-    drivetrain.turn_for(LEFT, 90, DEGREES)
+    drivetrain.drive_for(FORWARD, 98, INCHES)
+    drivetrain.turn_for(RIGHT, 90, DEGREES)
+    IntakeSpin.spin(FORWARD) # score matchload
     drivetrain.drive_for(FORWARD, 12, INCHES)
-    IntakeSpin.spin(REVERSE) # score matchload
+    drivetrain.drive_for(REVERSE, 4, INCHES)
+    wait(500, MSEC)
+    # drivetrain.drive_for(FORWARD, 1, INCHES)
 
 
 def score_triball():
 
     # Intake One Triball and score it
+    
+    wait(50, MSEC)
+    IntakeSpin.spin(REVERSE)
+    drivetrain.drive_for(REVERSE, 27, INCHES)
+    drivetrain.set_turn_velocity(50, PERCENT)
+    drivetrain.turn_for(LEFT, 90, DEGREES)
+    drivetrain.set_drive_velocity(15, PERCENT)
+    IntakeSpin.spin(REVERSE)
+    drivetrain.drive_for(FORWARD, 12, INCHES)
+    drivetrain.set_drive_velocity(80, PERCENT)
+    IntakeSpin.spin(REVERSE) # intake triball
+    wait(500, MSEC)
+    drivetrain.drive_for(REVERSE, 12, INCHES)
+    drivetrain.turn_for(RIGHT, 90, DEGREES)
 
-    drivetrain.turn_for(RIGHT, 180, DEGREES)
-    drivetrain.drive_for(FORWARD, 24, INCHES)
-    IntakeSpin.spin(FORWARD) # intake triball
-    drivetrain.turn_for(RIGHT, 180, DEGREES)
-    drivetrain.drive_for(FORWARD, 24, INCHES)
-    IntakeSpin.spin(REVERSE) # score triball
+    drivetrain.drive_for(FORWARD, 20, INCHES)
+    IntakeSpin.spin(FORWARD)
+    wait(500, MSEC)
+    drivetrain.drive_for(FORWARD, 6, INCHES)
+
+    # drivetrain.set_turn_velocity(80, PERCENT)
+
+
+    # drivetrain.turn_for(RIGHT, 180, DEGREES)
+    # drivetrain.drive_for(FORWARD, 24, INCHES)
+    # IntakeSpin.spin(REVERSE) # score triball
 
 
 def knock_triball():
@@ -423,8 +445,8 @@ def fifteen_second_auton():
 
     score_matchload()
     score_triball()
-    knock_triball()
-    touch_elev_bar()
+    # knock_triball()
+    # touch_elev_bar()
 
 # ---------------------- #
 
