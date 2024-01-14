@@ -353,7 +353,7 @@ def score_matchload():
 
     # Score Matchload in close goal
 
-    drivetrain.drive_for(FORWARD, 100, INCHES)
+    drivetrain.drive_for(FORWARD, 99, INCHES)
     drivetrain.turn_for(RIGHT, 90, DEGREES)
     IntakeSpin.spin(FORWARD) # score matchload
     drivetrain.drive_for(FORWARD, 12, INCHES)
@@ -390,8 +390,6 @@ def score_triball():
     drivetrain.drive_for(FORWARD, 48, INCHES)
     drivetrain.turn_for(LEFT, 45, DEGREES)
     IntakeSpin.spin(REVERSE)
-    wait(2000, MSEC)
-    drivetrain.drive_for(REVERSE, 12, INCHES)
     drivetrain.turn_for(LEFT, 120, DEGREES)
     drivetrain.drive_for(FORWARD, 48, INCHES)
     IntakeSpin.spin(FORWARD)
