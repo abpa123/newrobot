@@ -395,6 +395,7 @@ def knock_triball():
 
     # Go to corner, Knock triball out of 
     # match load zone using wings
+    # still under development
 
     drivetrain.turn_for(RIGHT, 90, DEGREES)
     drivetrain.drive_for(FORWARD, 98, INCHES)
@@ -404,7 +405,10 @@ def knock_triball():
 
 
 def touch_elev_bar():
+
     # Touch Elevation Bar
+    # still under development
+
     drivetrain.drive_for(FORWARD, 54, INCHES)
 
 # --------------------------------- #
