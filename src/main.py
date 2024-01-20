@@ -379,8 +379,11 @@ def triball_one():
 
 
 def triball_two():
-    drivetrain.turn_for(RIGHT, 150, DEGREES) # turn towards the next triball
+
+    # Intake Another Triball and score it
+
     IntakeSpin.spin(REVERSE) # start intaking while driving
+    drivetrain.turn_for(RIGHT, 150, DEGREES) # turn towards the next triball
     drivetrain.set_drive_velocity(40, PERCENT) # lower drive velocity
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to triball
     drivetrain.turn_for(LEFT, 45, DEGREES) # position robot to face triball
