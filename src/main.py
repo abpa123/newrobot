@@ -260,6 +260,7 @@ def when_started1():
     FlywheelUpDown.set_velocity(70, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
 
+
 # --------------------------------- #
 
 # ------------- Wings ------------- #
@@ -347,6 +348,7 @@ def initialization():
     IntakeSpin.set_velocity(100, PERCENT)
     FlywheelUpDown.set_velocity(70, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
+    FlywheelUpDown.spin(FORWARD)
 
 
 def score_matchload():
@@ -387,7 +389,7 @@ def triball_two():
     drivetrain.set_drive_velocity(40, PERCENT) # lower drive velocity
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to triball
     drivetrain.turn_for(LEFT, 45, DEGREES) # position robot to face triball
-    drivetrain.drive_for(FORWARD, 6, INCHES) # creep up while intaking triball
+    drivetrain.drive_for(REVERSE, 6, INCHES) # creep up while intaking triball
     drivetrain.turn_for(LEFT, 120, DEGREES) # turn toward goal
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to goal
     IntakeSpin.spin(FORWARD) # outtake triball into goal
