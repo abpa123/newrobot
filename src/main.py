@@ -192,10 +192,10 @@ def rc_auto_loop_function_controller_1():
             # in both this and the controller code
 
             if controller_1.buttonR1.pressing():
-                Flywheel.spin(FORWARD)
+                Flywheel.spin(REVERSE)
                 controller_1_right_shoulder_control_motors_stopped = False
             elif controller_1.buttonR2.pressing():
-                Flywheel.spin(REVERSE)
+                Flywheel.spin(FORWARD)
                 controller_1_right_shoulder_control_motors_stopped = False
             elif not controller_1_right_shoulder_control_motors_stopped:
                 Flywheel.stop()
@@ -296,14 +296,14 @@ def when_started4():
 
 def when_started5():
     if controller_1.buttonR2.pressing():
-        Flywheel.spin(REVERSE)
+        Flywheel.spin(FORWARD)
     else:
         Flywheel.stop()
 
 
 def when_started6():
     if controller_1.buttonR1.pressing():
-        Flywheel.spin(FORWARD)
+        Flywheel.spin(REVERSE)
     else:
         IntakeSpin.stop()
 
@@ -353,48 +353,42 @@ def score_matchload():
 
     # Score Matchload in close goal
 
-    drivetrain.drive_for(FORWARD, 99, INCHES)
-    drivetrain.turn_for(RIGHT, 90, DEGREES)
-    IntakeSpin.spin(FORWARD) # score matchload
-    drivetrain.drive_for(FORWARD, 12, INCHES)
-    # wait(500, MSEC) # wait while scoring
-    drivetrain.drive_for(REVERSE, 4, INCHES)
-    wait(500, MSEC)
+    drivetrain.drive_for(FORWARD, 99, INCHES) # go to goal
+    drivetrain.turn_for(RIGHT, 90, DEGREES) # position to outtake matchload
+    IntakeSpin.spin(FORWARD) # outtake matchload into goal
+    drivetrain.drive_for(FORWARD, 12, INCHES) # push matchload in
+    drivetrain.drive_for(REVERSE, 4, INCHES) # driveback
 
-
-def score_triball():
+def triball_one():
 
     # Intake One Triball and score it
     
-    wait(50, MSEC)
     IntakeSpin.spin(REVERSE) # start intaking while driving
-    drivetrain.drive_for(REVERSE, 27, INCHES)
+    drivetrain.drive_for(REVERSE, 27, INCHES) # go to triball
     drivetrain.set_turn_velocity(50, PERCENT) # lower turn velocity
-    drivetrain.turn_for(LEFT, 90, DEGREES)
-    drivetrain.set_drive_velocity(15, PERCENT)
-    drivetrain.drive_for(FORWARD, 12, INCHES)
-    drivetrain.set_drive_velocity(80, PERCENT)
-    IntakeSpin.spin(REVERSE) # intake triball
-    wait(800, MSEC) # wait while intaking
-    IntakeSpin.spin(REVERSE)
-    drivetrain.drive_for(REVERSE, 12, INCHES)
-    drivetrain.turn_for(RIGHT, 90, DEGREES)
-    drivetrain.drive_for(FORWARD, 20, INCHES)
-    IntakeSpin.spin(FORWARD) # score triball
-    wait(500, MSEC) # wait while scoring
+    drivetrain.turn_for(LEFT, 90, DEGREES) # position to intake triball
+    drivetrain.set_drive_velocity(15, PERCENT) # lower drive velocity
+    drivetrain.drive_for(FORWARD, 12, INCHES) # creep up to triball while intaking it
+    drivetrain.set_drive_velocity(80, PERCENT) # set drive velocity back to original value
+    drivetrain.drive_for(REVERSE, 12, INCHES) # drive back
+    drivetrain.turn_for(RIGHT, 90, DEGREES) # turn towards goal
+    drivetrain.drive_for(FORWARD, 20, INCHES) # go to goal
+    IntakeSpin.spin(FORWARD) # outtake triball into goal
     drivetrain.drive_for(FORWARD, 7, INCHES) # push triball in
-    drivetrain.drive_for(REVERSE, 7, INCHES)
-    drivetrain.turn_for(RIGHT, 150, DEGREES)
-    IntakeSpin.spin(REVERSE)
-    drivetrain.set_drive_velocity(40, PERCENT)
-    drivetrain.drive_for(FORWARD, 48, INCHES)
-    drivetrain.turn_for(LEFT, 45, DEGREES)
-    IntakeSpin.spin(REVERSE)
-    drivetrain.turn_for(LEFT, 120, DEGREES)
-    drivetrain.drive_for(FORWARD, 48, INCHES)
-    IntakeSpin.spin(FORWARD)
-    wait(1000, MSEC)
-    drivetrain.drive_for(FORWARD, 6, INCHES)
+    drivetrain.drive_for(REVERSE, 7, INCHES) # driveback
+
+
+def triball_two():
+    drivetrain.turn_for(RIGHT, 150, DEGREES) # turn towards the next triball
+    IntakeSpin.spin(REVERSE) # start intaking while driving
+    drivetrain.set_drive_velocity(40, PERCENT) # lower drive velocity
+    drivetrain.drive_for(FORWARD, 48, INCHES) # drive to triball
+    drivetrain.turn_for(LEFT, 45, DEGREES) # position robot to face triball
+    drivetrain.drive_for(FORWARD, 6, INCHES) # creep up while intaking triball
+    drivetrain.turn_for(LEFT, 120, DEGREES) # turn toward goal
+    drivetrain.drive_for(FORWARD, 48, INCHES) # drive to goal
+    IntakeSpin.spin(FORWARD) # outtake triball into goal
+    drivetrain.drive_for(FORWARD, 6, INCHES) # push triball in
 
 
 def knock_triball():
@@ -420,8 +414,19 @@ def touch_elev_bar():
 # Only use this for the one minute auton,
 # since it exceeds fifteen seconds in the
 # normal match autonomous
+    
+def matchloads():
+    Flywheel.spin(REVERSE) # start spinning flwheel
+    drivetrain.turn_for(RIGHT, 60, DEGREES) # turn towards matchload zone
+    drivetrain.drive_for(FORWARD, 100, INCHES) # drive to matchload zone
+    FlywheelUpDown.spin(REVERSE) # raise flywheel
 
-def one_min_auton_second_triball():
+
+def one_min_triball():
+
+    # Currently this function is still
+    # under development do not use this
+
     # Intake another triball and score it
     drivetrain.turn_for(LEFT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 48, INCHES)
@@ -439,20 +444,42 @@ def one_min_auton_second_triball():
 # respsective autons below, finally 
 # calling it in the main function
 
+# --- Goal Positions --- #    
+
+def close_goal():
+
+    # This scores the
+    # matchload, intakes
+    # two triballs and 
+    # scores them
+
+    score_matchload()
+    triball_one()
+    triball_two()
+
+
+def far_goal():
+
+    # This is still under
+    # development
+
+    score_matchload()
+    triball_one()
+    triball_two()
+    knock_triball()
+    touch_elev_bar()
+
+# ---------------------- #
+
 # --- Fifteen Second --- #
 
 def fifteen_second_auton():
 
-    # This ends up scoring the matchload,
-    # intaking and scoring one triball,
-    # knocking the triball in the match
-    # load zone out, and touching the 
-    # elevation bar
+    # Call the correct func
+    # depending on the pos-
+    # ition of the robot
 
-    score_matchload()
-    score_triball()
-    # knock_triball()
-    # touch_elev_bar()
+    close_goal()
 
 # ---------------------- #
 
@@ -462,17 +489,21 @@ def one_min_auton():
 
     # This ends up scoring the matchload,
     # and intaking and scoring two triballs
+    # and then going to matchload zone
+    # so that we can matchload triballs
 
     score_matchload()
-    score_triball()
-    one_min_auton_second_triball()
+    triball_one()
+    triball_two()
+    matchloads()
+
+    # one_min_triball()
 
 # ---------------------- #
 
 # Call the auton function below,
 # either the fifteen_second_auton()
-# or the  one_min_auton()
-    
+# or the  one_min_auton()  
 # Change function before skills
 
 # ----- Main Auton ----- #
