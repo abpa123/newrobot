@@ -259,6 +259,7 @@ def when_started1():
     IntakeSpin.set_velocity(100, PERCENT)
     FlywheelUpDown.set_velocity(70, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
+    FlywheelUpDown.spin(FORWARD)
 
 
 # --------------------------------- #
@@ -285,6 +286,7 @@ def when_started3():
     if controller_1.buttonDown.pressing():
         FlywheelUpDown.spin(FORWARD)
     else:
+        FlywheelUpDown.spin(FORWARD)
         FlywheelUpDown.stop()
 
 
@@ -292,6 +294,7 @@ def when_started4():
     if controller_1.buttonUp.pressing():
         FlywheelUpDown.spin(REVERSE)
     else:
+        FlywheelUpDown.spin(FORWARD)
         FlywheelUpDown.stop()
 
 
