@@ -259,7 +259,6 @@ def when_started1():
     IntakeSpin.set_velocity(100, PERCENT)
     FlywheelUpDown.set_velocity(70, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
-    FlywheelUpDown.spin(FORWARD)
 
 
 # --------------------------------- #
@@ -283,19 +282,27 @@ def onevent_controller_1buttonY_pressed_0():
 # ------------ Flywheel ----------- #
 
 def when_started3():
-    if controller_1.buttonDown.pressing():
+    # while controller_1.buttonUp.pressing == False:
+    if controller_1.buttonUp.pressing() == False:
         FlywheelUpDown.spin(FORWARD)
-    else:
-        FlywheelUpDown.spin(FORWARD)
-        FlywheelUpDown.stop()
+    # else:
+    #     FlywheelUpDown.spin(REVERSE)
+    # while controller_1.buttonDown.pressing():
+    #     FlywheelUpDown.spin(FORWARD)
+    # else:
+    #     FlywheelUpDown.stop()
 
 
 def when_started4():
-    if controller_1.buttonUp.pressing():
-        FlywheelUpDown.spin(REVERSE)
-    else:
+    if controller_1.buttonUp.pressing() == False:
         FlywheelUpDown.spin(FORWARD)
-        FlywheelUpDown.stop()
+    while controller_1.buttonUp.pressing() == True:
+        FlywheelUpDown.spin(FORWARD)
+    
+    # if controller_1.buttonUp.pressing():
+    #     FlywheelUpDown.spin(REVERSE)
+    # else:
+    #     FlywheelUpDown.stop()
 
 
 def when_started5():
@@ -397,6 +404,7 @@ def triball_two_close():
     drivetrain.turn_for(LEFT, 45, DEGREES) # position robot to face triball
     drivetrain.drive_for(REVERSE, 6, INCHES) # creep up while intaking triball
     drivetrain.turn_for(LEFT, 120, DEGREES) # turn toward goal
+    drivetrain.set_drive_velocity(100, PERCENT) # set drive velocity to full speed
     drivetrain.drive_for(FORWARD, 50, INCHES) # drive to goal
     IntakeSpin.spin(FORWARD) # outtake triball into goal
     drivetrain.drive_for(FORWARD, 6, INCHES) # push triball in
@@ -496,7 +504,7 @@ def fifteen_second_auton():
     # depending on the pos-
     # ition of the robot
 
-    far_goal()
+    close_goal()
 
 # ---------------------- #
 
@@ -528,7 +536,7 @@ def onauton_autonomous_0():
     # and it calls the autonomous function
 
     initialization()
-    one_min_auton()
+    fifteen_second_auton()
 
 # ---------------------- #
 
@@ -594,4 +602,3 @@ when_started1() # Intial Setup Function
 # ----------------------------------------------------- #
 
 # ****************************************************************************************************** #
-
