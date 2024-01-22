@@ -147,18 +147,24 @@ The driver and autonomous code is the main code that will be edited, however the
 
 ### Autonomous:
 
-- Close Fifteen Second Autonomous is Slot 1: This ends up scoring the matchload and intaking and scoring two triballs for a total score of 15 points in the > autonomous. It scores 3 triballs with about a 75 percent accuracy, two triballs with a 90 percent accuracy and one triball at a 100 percent accuracy. 
-- Far Fifteen Second Autonomous is Slot 2: This ends up simply scoring one matchload for a total of 5 points.
-- One Minute Autonomous is Slot 3: This starts with the matchload functionality where the flywheel arm raises and the flywheel spins. Two people will matchload into the flywheel. 2 points are scored for every triball that lands up on the other side (not scored) and 5 points for each one scored. When we ran this we got about 50 or more points.
+> Close Fifteen Second Autonomous is Slot 1: This ends up scoring the matchload and intaking and scoring two triballs for a total score of 15 points in the autonomous. This almost always gets autonomous bonus, making it more of a 25 point autonomous. It scores 3 triballs with about a 75 percent accuracy, two triballs with a 90 percent accuracy and one triball at a 100 percent accuracy.
+>  
+> Far Fifteen Second Autonomous is Slot 2: This ends up simply scoring one matchload for a total of 5 points.
+> 
+> One Minute Autonomous is Slot 3: This starts with the matchload functionality where the flywheel arm raises and the flywheel spins. Two people will matchload into the flywheel. 2 points are scored for every triball that lands up on the other side (not scored) and 5 points for each one scored. When we ran this we got about 50 or more points.
 
 ### Match-loading:
 
-- Try to matchload the triballs as fast as possible during driver skills and programming skills. For driver skills, matchload for 25 seconds, which is when the controller shows 35 seconds remain. Then try scoring the triballs on the field. When we did this we got about 80 points, although higher is totally possible.
-- Remember that the bottom right shoulder button (R2) makes the flywheel spin in the direction so that it shoots towards the goal. The up arrow moves the arm up and the down arrow moves it down.
-- Remember to hold the up arrow when match-loading so the arm doesn't fall back down.
+> Try to matchload the triballs as fast as possible during driver skills and programming skills. For driver skills, matchload for 25 seconds, which is when the controller shows 35 seconds remain. Then try scoring the triballs on the field. When we did this we got about 80 points, although higher is totally possible.
+> 
+> Remember that the bottom right shoulder button (R2) makes the flywheel spin in the direction so that it shoots towards the goal. The up arrow moves the arm up and the down arrow moves it down.
+> 
+ Remember to hold the up arrow when match-loading so the arm doesn't fall back down.
 
 ### General Advice:
 
-- Stay calm, but also attempt to do things efficiently and quickly. If something breaks, tell the team and don't panic. You will get it done before your next match.
-- Always keep in mind when you will do driver skills, programming skills, and judging. These can be very valuable and you do not want to miss out on them.
-- Talk with your alliance beforehand and try to get a sense of what your opponents will do. Think about who you could pair up with during the tournament.
+> Stay calm, but also attempt to do things efficiently and quickly. If something breaks, tell the team and don't panic. You will get it done before your next match.
+
+> Always keep in mind when you will do driver skills, programming skills, and judging. These can be very valuable and you do not want to miss out on them.
+
+> Talk with your alliance beforehand and try to get a sense of what your opponents will do. Think about who you could pair up with during the tournament.
