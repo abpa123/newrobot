@@ -57,7 +57,8 @@ drivetrain = SmartDrive(left_drive_smart, right_drive_smart, drivetrain_inertial
 # ----------- Mechanisms ---------- #
 
 IntakeSpin = Motor(Ports.PORT11, GearSetting.RATIO_6_1, direction)
-FlywheelUpDown = Motor(Ports.PORT12, GearSetting.RATIO_6_1, direction)
+FlywheelUpDown1 = Motor(Ports.PORT12, GearSetting.RATIO_6_1, direction)
+FlywheelUpDown2 = Motor(Ports.PORT2, GearSetting.RATIO_6_1, direction)
 Flywheel = Motor(Ports.PORT1, GearSetting.RATIO_6_1, direction)
 sideskirt = DigitalOut(brain.three_wire_port.h)
 
@@ -201,13 +202,16 @@ def rc_auto_loop_function_controller_1():
                 Flywheel.stop()
                 controller_1_right_shoulder_control_motors_stopped = True
             if controller_1.buttonUp.pressing():
-                FlywheelUpDown.spin(REVERSE)
+                FlywheelUpDown1.spin(REVERSE)
+                FlywheelUpDown2.spin(FORWARD)
                 controller_1_up_down_buttons_control_motors_stopped = False
             elif controller_1.buttonDown.pressing():
-                FlywheelUpDown.spin(FORWARD)
+                FlywheelUpDown1.spin(FORWARD)
+                FlywheelUpDown2.spin(REVERSE)
                 controller_1_up_down_buttons_control_motors_stopped = False
             elif not controller_1_up_down_buttons_control_motors_stopped:
-                FlywheelUpDown.stop()
+                FlywheelUpDown1.stop()
+                FlywheelUpDown2.stop()
                 controller_1_up_down_buttons_control_motors_stopped = True
 
             # --------------------------------- #
@@ -257,7 +261,8 @@ def when_started1():
     drivetrain.set_drive_velocity(100, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
     IntakeSpin.set_velocity(100, PERCENT)
-    FlywheelUpDown.set_velocity(70, PERCENT)
+    FlywheelUpDown1.set_velocity(70, PERCENT)
+    FlywheelUpDown2.set_velocity(70, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
 
 
@@ -283,26 +288,21 @@ def onevent_controller_1buttonY_pressed_0():
 
 def when_started3():
     # while controller_1.buttonUp.pressing == False:
-    if controller_1.buttonUp.pressing() == False:
-        FlywheelUpDown.spin(FORWARD)
-    # else:
-    #     FlywheelUpDown.spin(REVERSE)
-    # while controller_1.buttonDown.pressing():
-    #     FlywheelUpDown.spin(FORWARD)
-    # else:
-    #     FlywheelUpDown.stop()
+    if controller_1.buttonUp.pressing():
+        FlywheelUpDown1.spin(REVERSE)
+        FlywheelUpDown2.spin(FORWARD)
+    else:
+        FlywheelUpDown1.stop()
+        FlywheelUpDown2.stop()
 
 
 def when_started4():
-    if controller_1.buttonUp.pressing() == False:
-        FlywheelUpDown.spin(FORWARD)
-    while controller_1.buttonUp.pressing() == True:
-        FlywheelUpDown.spin(FORWARD)
-    
-    # if controller_1.buttonUp.pressing():
-    #     FlywheelUpDown.spin(REVERSE)
-    # else:
-    #     FlywheelUpDown.stop()
+    if controller_1.buttonDown.pressing():
+        FlywheelUpDown1.spin(FORWARD)
+        FlywheelUpDown2.spin(REVERSE)
+    else:
+        FlywheelUpDown1.stop()
+        FlywheelUpDown2.stop()
 
 
 def when_started5():
@@ -356,9 +356,10 @@ def initialization():
     drivetrain.set_drive_velocity(80, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
     IntakeSpin.set_velocity(100, PERCENT)
-    FlywheelUpDown.set_velocity(70, PERCENT)
+    FlywheelUpDown1.set_velocity(70, PERCENT)
+    FlywheelUpDown2.set_velocity(70, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
-    FlywheelUpDown.spin(FORWARD)
+    FlywheelUpDown1.spin(FORWARD)
 
 
 def score_matchload_close():
@@ -448,7 +449,8 @@ def touch_elev_bar():
 
 def matchloads():
     Flywheel.spin(FORWARD) # start spinning flwheel
-    FlywheelUpDown.spin(REVERSE) # raise flywheel
+    FlywheelUpDown1.spin(REVERSE) # raise flywheel
+    FlywheelUpDown2.spin(FORWARD)
 
 
 def one_min_triball():
