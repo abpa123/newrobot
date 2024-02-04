@@ -366,7 +366,7 @@ def score_matchload_close():
 
     # Score Matchload in close goal
 
-    drivetrain.drive_for(FORWARD, 99, INCHES) # go to goal
+    drivetrain.drive_for(FORWARD, 88, INCHES) # go to goal
     drivetrain.turn_for(RIGHT, 90, DEGREES) # position to outtake matchload
     IntakeSpin.spin(FORWARD) # outtake matchload into goal
     drivetrain.drive_for(FORWARD, 12, INCHES) # push matchload in
@@ -399,14 +399,14 @@ def triball_two_close():
     # Intake Another Triball and score it
 
     IntakeSpin.spin(REVERSE) # start intaking while driving
-    drivetrain.turn_for(RIGHT, 150, DEGREES) # turn towards the next triball
+    drivetrain.turn_for(RIGHT, 160, DEGREES) # turn towards the next triball
     drivetrain.set_drive_velocity(40, PERCENT) # lower drive velocity
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to triball
     drivetrain.turn_for(LEFT, 45, DEGREES) # position robot to face triball
     drivetrain.drive_for(REVERSE, 6, INCHES) # creep up while intaking triball
-    drivetrain.turn_for(LEFT, 120, DEGREES) # turn toward goal
+    drivetrain.turn_for(LEFT, 145, DEGREES) # turn toward goal
     drivetrain.set_drive_velocity(100, PERCENT) # set drive velocity to full speed
-    drivetrain.drive_for(FORWARD, 50, INCHES) # drive to goal
+    drivetrain.drive_for(FORWARD, 48, INCHES) # drive to goal
     IntakeSpin.spin(FORWARD) # outtake triball into goal
     drivetrain.drive_for(FORWARD, 6, INCHES) # push triball in
     
@@ -538,7 +538,7 @@ def onauton_autonomous_0():
     # and it calls the autonomous function
 
     initialization()
-    fifteen_second_auton()
+    one_min_auton()
 
 # ---------------------- #
 
