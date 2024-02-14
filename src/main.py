@@ -366,7 +366,7 @@ def score_matchload_close():
 
     # Score Matchload in close goal
 
-    drivetrain.drive_for(FORWARD, 88, INCHES) # go to goal
+    drivetrain.drive_for(FORWARD, 92, INCHES) # go to goal
     drivetrain.turn_for(RIGHT, 90, DEGREES) # position to outtake matchload
     IntakeSpin.spin(FORWARD) # outtake matchload into goal
     drivetrain.drive_for(FORWARD, 12, INCHES) # push matchload in
@@ -404,7 +404,7 @@ def triball_two_close():
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to triball
     drivetrain.turn_for(LEFT, 45, DEGREES) # position robot to face triball
     drivetrain.drive_for(REVERSE, 6, INCHES) # creep up while intaking triball
-    drivetrain.turn_for(LEFT, 145, DEGREES) # turn toward goal
+    drivetrain.turn_for(LEFT, 130, DEGREES) # turn toward goal
     drivetrain.set_drive_velocity(100, PERCENT) # set drive velocity to full speed
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to goal
     IntakeSpin.spin(FORWARD) # outtake triball into goal
@@ -415,7 +415,7 @@ def score_matchload_far():
 
     # Score Matchload in close goal
 
-    drivetrain.drive_for(FORWARD, 99, INCHES) # go to goal
+    drivetrain.drive_for(FORWARD, 102, INCHES) # go to goal
     drivetrain.turn_for(LEFT, 90, DEGREES) # position to outtake matchload
     IntakeSpin.spin(FORWARD) # outtake matchload into goal
     drivetrain.drive_for(FORWARD, 12, INCHES) # push matchload in
@@ -448,9 +448,19 @@ def touch_elev_bar():
 # normal match autonomous
 
 def matchloads():
+    Flywheel.set_velocity(70, PERCENT)
     Flywheel.spin(FORWARD) # start spinning flwheel
     FlywheelUpDown1.spin(REVERSE) # raise flywheel
     FlywheelUpDown2.spin(FORWARD)
+    # drivetrain.set_drive_velocity(70, PERCENT)
+    # drivetrain.drive_for(FORWARD, 190, INCHES)
+    # drivetrain.turn_for(RIGHT, 120, DEGREES)
+    # drivetrain.drive_for(REVERSE, 50, INCHES)
+    # drivetrain.turn_for(LEFT, 45, DEGREES)
+    # drivetrain.set_drive_velocity(100, PERCENT)
+    # for _ in range(5):
+    #     drivetrain.drive_for(REVERSE, 35, INCHES)
+    #     drivetrain.drive_for(FORWARD, 40, INCHES)
 
 
 def one_min_triball():
@@ -538,7 +548,7 @@ def onauton_autonomous_0():
     # and it calls the autonomous function
 
     initialization()
-    one_min_auton()
+    fifteen_second_auton()
 
 # ---------------------- #
 
