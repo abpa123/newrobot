@@ -448,19 +448,27 @@ def touch_elev_bar():
 # normal match autonomous
 
 def matchloads():
-    Flywheel.set_velocity(70, PERCENT)
-    Flywheel.spin(FORWARD) # start spinning flwheel
-    FlywheelUpDown1.spin(REVERSE) # raise flywheel
-    FlywheelUpDown2.spin(FORWARD)
-    # drivetrain.set_drive_velocity(70, PERCENT)
-    # drivetrain.drive_for(FORWARD, 190, INCHES)
-    # drivetrain.turn_for(RIGHT, 120, DEGREES)
-    # drivetrain.drive_for(REVERSE, 50, INCHES)
-    # drivetrain.turn_for(LEFT, 45, DEGREES)
-    # drivetrain.set_drive_velocity(100, PERCENT)
-    # for _ in range(5):
-    #     drivetrain.drive_for(REVERSE, 35, INCHES)
-    #     drivetrain.drive_for(FORWARD, 40, INCHES)
+    # Flywheel.set_velocity(70, PERCENT)
+    # Flywheel.spin(FORWARD) # start spinning flwheel
+    # FlywheelUpDown1.spin(REVERSE) # raise flywheel
+    # FlywheelUpDown2.spin(FORWARD)
+    # wait(45000, MSEC)
+    # FlywheelUpDown1.spin(FORWARD)
+    # FlywheelUpDown2.spin(REVERSE)
+    drivetrain.set_drive_velocity(70, PERCENT)
+    drivetrain.drive_for(FORWARD, 5, INCHES)
+    drivetrain.turn_for(RIGHT, 8, DEGREES)
+    drivetrain.drive_for(FORWARD, 180, INCHES)
+    drivetrain.turn_for(RIGHT, 120, DEGREES)
+    drivetrain.drive_for(REVERSE, 50, INCHES)
+    drivetrain.turn_for(LEFT, 45, DEGREES)
+    drivetrain.set_drive_velocity(100, PERCENT)
+    for _ in range(2):
+        drivetrain.drive_for(REVERSE, 35, INCHES)
+        drivetrain.drive_for(FORWARD, 15, INCHES)
+    for _ in range(4):
+        drivetrain.drive_for(REVERSE, 35, INCHES)
+        drivetrain.drive_for(FORWARD, 40, INCHES)
 
 
 def one_min_triball():
@@ -548,7 +556,7 @@ def onauton_autonomous_0():
     # and it calls the autonomous function
 
     initialization()
-    fifteen_second_auton()
+    one_min_auton()
 
 # ---------------------- #
 
