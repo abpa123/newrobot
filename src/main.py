@@ -263,7 +263,7 @@ def when_started1():
     IntakeSpin.set_velocity(100, PERCENT)
     FlywheelUpDown1.set_velocity(100, PERCENT)
     FlywheelUpDown2.set_velocity(100, PERCENT)
-    Flywheel.set_velocity(100, PERCENT)
+    Flywheel.set_velocity(70, PERCENT)
 
 
 # --------------------------------- #
@@ -452,7 +452,7 @@ def matchloads():
     # Flywheel.spin(FORWARD) # start spinning flwheel
     # FlywheelUpDown1.spin(REVERSE) # raise flywheel
     # FlywheelUpDown2.spin(FORWARD)
-    # wait(45000, MSEC)
+    # wait(40000, MSEC)
     # FlywheelUpDown1.spin(FORWARD)
     # FlywheelUpDown2.spin(REVERSE)
     drivetrain.set_drive_velocity(70, PERCENT)
