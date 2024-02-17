@@ -261,8 +261,8 @@ def when_started1():
     drivetrain.set_drive_velocity(100, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
     IntakeSpin.set_velocity(100, PERCENT)
-    FlywheelUpDown1.set_velocity(70, PERCENT)
-    FlywheelUpDown2.set_velocity(70, PERCENT)
+    FlywheelUpDown1.set_velocity(100, PERCENT)
+    FlywheelUpDown2.set_velocity(100, PERCENT)
     Flywheel.set_velocity(100, PERCENT)
 
 
