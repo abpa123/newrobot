@@ -524,7 +524,7 @@ def fifteen_second_auton():
     # depending on the pos-
     # ition of the robot
 
-    close_goal()
+    far_goal()
 
 # ---------------------- #
 
@@ -556,7 +556,7 @@ def onauton_autonomous_0():
     # and it calls the autonomous function
 
     initialization()
-    one_min_auton()
+    fifteen_second_auton()
 
 # ---------------------- #
 
