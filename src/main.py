@@ -404,7 +404,7 @@ def triball_two_close():
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to triball
     drivetrain.turn_for(LEFT, 45, DEGREES) # position robot to face triball
     drivetrain.drive_for(REVERSE, 6, INCHES) # creep up while intaking triball
-    drivetrain.turn_for(LEFT, 130, DEGREES) # turn toward goal
+    drivetrain.turn_for(LEFT, 120, DEGREES) # turn toward goal
     drivetrain.set_drive_velocity(100, PERCENT) # set drive velocity to full speed
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to goal
     IntakeSpin.spin(FORWARD) # outtake triball into goal
@@ -524,7 +524,7 @@ def fifteen_second_auton():
     # depending on the pos-
     # ition of the robot
 
-    far_goal()
+    close_goal()
 
 # ---------------------- #
 
