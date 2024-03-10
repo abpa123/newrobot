@@ -409,6 +409,8 @@ def triball_two_close():
     drivetrain.drive_for(FORWARD, 48, INCHES) # drive to goal
     IntakeSpin.spin(FORWARD) # outtake triball into goal
     drivetrain.drive_for(FORWARD, 6, INCHES) # push triball in
+    wait(500, MSEC)
+    drivetrain.drive_for(REVERSE, 10, INCHES)
     
 
 def score_matchload_far():
