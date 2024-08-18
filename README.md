@@ -61,7 +61,7 @@ To add a device or change the code, add your device below and add the correspond
 
 The driver code has commands for all types of driver functions. This is where you program things that the controller will execute. You should have defined the device that is performing the function in the robot initialization code. The basic layout of code in the driver code section looks like this:
 
-```
+```python
 def when_started1():
     drivetrain.set_drive_velocity(100, PERCENT)
     drivetrain.set_turn_velocity(100, PERCENT)
@@ -72,14 +72,14 @@ def when_started1():
 
 When adding your function, be sure to continue the number system when naming the function. Note that `whenstarted1()` is the initial function and it is where you define initial characteristics such as velocity for the driver period. After creating your function, be sure to call it in the system event handlers. They look like this:
 
-```
+```python
 ws2 = Thread(when_started2)
 ws3 = Thread(when_started3)
 ```
 
 There are a few main ways to define a new function. In that same driver code, create a function that uses a button such as A, B, X, or Y. You can do this by creating a button function like the following: 
 
-```
+```python
 def onevent_controller_1buttonX_pressed_0():
     insert code here...
 ```
@@ -87,7 +87,7 @@ def onevent_controller_1buttonX_pressed_0():
 Then use this code later in the system event handlers by telling VEX that you are using that button and when that button is pressed, call the function you defined earlier. In this example, the function that will call is that `onevent_controller_1buttonX_pressed_0()` function. You can do this in the system event handlers by doing something like this, instead with your function name, which should be named similarly:
 
 
-```
+```python
 controller_1.buttonX.pressed(onevent_controller_1buttonX_pressed_0)
 ```
 
@@ -97,7 +97,7 @@ Note that everything eventually should be called in the system event handlers, i
 
 The Autonomous Code is broken down into many functions in order to allow for better testing and the creation of new functions. VEX primarily has only two main times pre-programmed code is run. This is in the fifteen second autonomous and the one minute autonomous skills challenge. There is a section in the code deemed "Both Autons" which is code applicable for both of these autonomous programs. Then there is the "One Min Auton" part, which is only to be used for the skills challenge. To add a function that performs a specific task, such as scoring a matchload, define a function in one of these areas:
 
-```
+```python
 def score_matchload():
 
     # Score Matchload in close goal
@@ -110,7 +110,7 @@ def score_matchload():
 
 Now this function needs to be called in either the `fifteen_second_auton()` function, the `one_min_auton()` or both. One of these function will finally be called in the main autonomous function, `onauton_autonomous_0()`. Change the function that is called in this function to the right autonomous code, depending on whether you are doing skills or a normal match. This main function is later called in the `vexcode_auton_function()`, which is what runs when autonomous is enabled during competition. To outline these steps, each of the functions are shown below in order (just the matchload function is displayed for understanding).
 
-```
+```python
 [a lot of code here]
 
 def fifteen_second_auton():
