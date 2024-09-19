@@ -38,7 +38,7 @@ There are a few main sections you may find yourself editing when working on the 
 ### The Robot Initialization Code
 This is the section of the robot code where all initial mechanisms and functions are defined. It is where all devices, as VEX refers to them, should be defined and eventually used in the program when defining functions in the controller code. It looks like this:
 
-```
+```python
 controller_1 = Controller(PRIMARY)
 left_motor_a = Motor(Ports.PORT7, GearSetting.RATIO_6_1, direction)
 left_motor_b = Motor(Ports.PORT10, GearSetting.RATIO_6_1, direction)
